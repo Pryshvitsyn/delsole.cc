@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabina della Vita 2.0 - Modello 3D Professionale</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; overflow-x: hidden; }
+        #viewer-container {
+            width: 100%;
+            height: 65vh; 
+            min-height: 550px;
+            background-color: #e5e7eb;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin-bottom: 1rem; 
+        }
+        canvas { display: block; }
+        .info-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px;
+            border-radius: 6px;
+            max-width: 200px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            font-size: 0.75rem; 
+        }
+        .info-panel h3 {
+            font-size: 0.85rem; 
+        }
+        .side-label {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 3px 6px; 
+            border-radius: 4px;
+            font-size: 0.75rem; 
+            pointer-events: none;
+            opacity: 0; 
+            transition: opacity 0.3s;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+        }
+        .highlighted-label {
+            opacity: 1 !important;
+        }
+        .exploded-indicator {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            font-size: 0.7rem;
+            color: #d1d5db;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold text-center text-green-800 mb-2">Visualizzazione 3D: Cabina della Vita 2.0</h1>
+        <p class="text-center text-gray-600 mb-6 font-semibold">Modello Interattivo - Esplora l'integrazione di GCS e Microgreen Farm.</p>
+
+        <div id="viewer-container">
+            <!-- Info Panel (Legenda) -->
+            <div class="info-panel hidden md:block">
+                <h3 class="font-bold mb-1 text-green-700">Legenda Componenti</h3>
+                <ul class="space-y-1">
+                    <li><span class="inline-block w-2.5 h-2.5 rounded-full mr-2" style="background-color: #0b1a37;"></span> **Pannello Solare / Batteria**</li>
+                    <li><span class="inline-block w-2.5 h-2.5 rounded-full mr-2" style="background-color: #38a169;"></span> **Moss Filter (GCS)**</li>
+                    <li><span class="inline-block w-2.5 h-2.5 rounded-full mr-2" style="background-color: #4a5568;"></span> **Microgreen Farm**</li>
+                    <li><span class="inline-block w-2.5 h-2.5 rounded-full mr-2" style="background-color: #a0522d;"></span> **Panchina / Struttura**</li>
+                </ul>
+            </div>
+
+            <!-- Labels for the sides (Hidden until hover) -->
+            <div id="label-front" data-side-id="front" class="side-label">LATO SICUREZZA (DAE/SOS)</div>
+            <div id="label-left" data-side-id="left" class="side-label">LATO MOSS FILTER (GCS)</div>
+            <div id="label-back" data-side-id="back" class="side-label">LATO MICROGREEN FARM</div>
+            <div id="label-right" data-side-id="right" class="side-label">LATO PANCHINA / SCHERMO</div>
+            <div id="label-solar" data-side-id="solar" class="side-label">PANNELLO SOLARE / BATTERIA</div>
+            
+            <div id="exploded-state" class="exploded-indicator">Vista Normale</div>
+        </div>
+
+        <!-- Controls for Exploded View (Below the Model) -->
+        <div id="controls" class="mt-6 p-4 bg-white rounded-xl shadow-lg border border-gray-200">
+            <h3 class="text-xl font-semibold text-gray-700 mb-3 text-center">Controlli Sezione Esplosa (Per Visualizzare gli Interni)</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button data-side="reset" class="px-5 py-1.5 bg-gray-500 text-white text-sm rounded-full hover:bg-gray-600 transition shadow-md">Vista Normale</button>
+                <button data-side="left" class="px-5 py-1.5 bg-green-600 text-white text-sm rounded-full hover:bg-green-700 transition shadow-md">Interno Filtro GCS</button>
+                <button data-side="back" class="px-5 py-1.5 bg-yellow-600 text-white text-sm rounded-full hover:bg-yellow-700 transition shadow-md">Interno Microgreen Farm</button>
+                <button data-side="front" class="px-5 py-1.5 bg-red-600 text-white text-sm rounded-full hover:bg-red-700 transition shadow-md">Hardware DAE / SOS</button>
+                <button data-side="right" class="px-5 py-1.5 bg-blue-600 text-white text-sm rounded-full hover:bg-blue-700 transition shadow-md">Interno Schermo / USB</button>
+            </div>
+            <p class="text-xs text-gray-500 mt-3 text-center">Clicca per allontanare la parete e vedere la struttura interna del modulo selezionato. Usa lo scroll per zoomare.</p>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            // --- 3D SETUP ---
+            const container = document.getElementById('viewer-container');
+            const stateIndicator = document.getElementById('exploded-state');
+            let scene, camera, renderer, controls, raycaster;
+            let width = container.clientWidth;
+            let height = container.clientHeight;
+            const pointer = new THREE.Vector2();
+            
+            // Scaled Dimensions (1 unit = 0.5 meter)
+            const SCALE = 0.5;
+            const CABIN_WIDTH = 1 * SCALE;
+            const CABIN_DEPTH = 1 * SCALE;
+            const CABIN_HEIGHT = 2.2 * SCALE;
+            
+            let cabinMesh, mossGroup, microgreenGroup, screenGroup, functionalGroup, solarMesh;
+            const explodeDistance = 0.5 * SCALE; 
+            let highlightMesh = null;
+            let allParts = []; // List of all groups/meshes that move or are interactive
+
+            function init() {
+                scene = new THREE.Scene();
+                scene.background = new THREE.Color(0xe5e7eb);
+
+                camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+                camera.position.set(2.5 * SCALE, 2.5 * SCALE, 2.5 * SCALE);
+                
+                raycaster = new THREE.Raycaster();
+
+                renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setSize(width, height);
+                container.appendChild(renderer.domElement);
+
+                // --- LIGHTING ---
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+                scene.add(ambientLight);
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
+                directionalLight.position.set(5, 10, 5).normalize();
+                scene.add(directionalLight);
+
+                // --- MATERIALS ---
+                const frameMaterial = new THREE.MeshStandardMaterial({ color: 0x1f2937, metalness: 0.5, roughness: 0.4 });
+                const mossOuterMaterial = new THREE.MeshStandardMaterial({ color: 0x38a169, transparent: true, opacity: 0.9 });
+                const mossInnerMaterial = new THREE.MeshStandardMaterial({ color: 0x48bb78, transparent: true, opacity: 0.5 });
+                const fanMaterial = new THREE.MeshStandardMaterial({ color: 0x9ca3af });
+                const screenOuterMaterial = new THREE.MeshStandardMaterial({ color: 0x111827, emissive: 0x00ff00, emissiveIntensity: 0.1 });
+                const screenInnerMaterial = new THREE.MeshStandardMaterial({ color: 0x4299e1, transparent: true, opacity: 0.5 }); // USB/Tech Panel
+                const daeMaterial = new THREE.MeshStandardMaterial({ color: 0xb73232 }); // Red for Safety
+                const functionalBaseMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc, transparent: true, opacity: 0.9 });
+                const solarMaterial = new THREE.MeshStandardMaterial({ color: 0x0b1a37, metalness: 0.9, roughness: 0.1 });
+                const microgreenShelfMaterial = new THREE.MeshStandardMaterial({ color: 0xa0522d });
+                const microgreenPlantMaterial = new THREE.MeshStandardMaterial({ color: 0x4a5568 }); // Grey/blue for internal tech/structure
+                const greenPlantMaterial = new THREE.MeshStandardMaterial({ color: 0x68d391 });
+
+                // --- GEOMETRY: CENTRAL CABIN CORE ---
+                const cabinGeometry = new THREE.BoxGeometry(CABIN_WIDTH, CABIN_HEIGHT, CABIN_DEPTH);
+                cabinMesh = new THREE.Mesh(cabinGeometry, frameMaterial);
+                cabinMesh.position.y = CABIN_HEIGHT / 2;
+                cabinMesh.userData.sideId = 'core';
+                scene.add(cabinMesh);
+
+                // --- GEOMETRY: SOLAR PANEL (Top) ---
+                const solarPanelGeometry = new THREE.BoxGeometry(CABIN_WIDTH + 0.2 * SCALE, 0.05 * SCALE, CABIN_DEPTH + 0.2 * SCALE);
+                solarMesh = new THREE.Mesh(solarPanelGeometry, solarMaterial);
+                solarMesh.position.y = CABIN_HEIGHT + 0.025 * SCALE + 0.1 * SCALE;
+                solarMesh.userData.sideId = 'solar';
+                scene.add(solarMesh);
+                allParts.push(solarMesh);
+
+                // --- SETUP SIDE GROUPS ---
+                const halfWidth = CABIN_WIDTH / 2;
+                const halfDepth = CABIN_DEPTH / 2;
+                const halfHeight = CABIN_HEIGHT / 2;
+
+                // 1. MOSS FILTER (Left Side) - Group
+                mossGroup = new THREE.Group();
+                mossGroup.userData.sideId = 'left';
+                mossGroup.userData.originalPosition = new THREE.Vector3(-halfWidth - 0.025 * SCALE, halfHeight, 0);
+                mossGroup.position.copy(mossGroup.userData.originalPosition);
+                scene.add(mossGroup);
+                allParts.push(mossGroup);
+
+                // Moss outer panel (green surface)
+                const mossOuterGeometry = new THREE.BoxGeometry(0.05 * SCALE, CABIN_HEIGHT * 0.9, CABIN_DEPTH * 0.9);
+                const mossOuterMesh = new THREE.Mesh(mossOuterGeometry, mossOuterMaterial);
+                mossGroup.add(mossOuterMesh);
+
+                // Moss inner structure/fans (to show GCS tech)
+                const mossInnerGeometry = new THREE.BoxGeometry(0.05 * SCALE, CABIN_HEIGHT * 0.7, CABIN_DEPTH * 0.7);
+                const mossInnerMesh = new THREE.Mesh(mossInnerGeometry, mossInnerMaterial);
+                mossInnerMesh.position.x = -0.07 * SCALE; // Offset slightly inwards from outer panel
+                mossGroup.add(mossInnerMesh);
+                
+                // 2. INTERACTIVE SCREEN / BENCH (Right Side) - Group
+                screenGroup = new THREE.Group();
+                screenGroup.userData.sideId = 'right';
+                screenGroup.userData.originalPosition = new THREE.Vector3(halfWidth + 0.025 * SCALE, halfHeight, 0);
+                screenGroup.position.copy(screenGroup.userData.originalPosition);
+                scene.add(screenGroup);
+                allParts.push(screenGroup);
+
+                // Screen outer panel
+                const screenOuterGeometry = new THREE.BoxGeometry(0.05 * SCALE, CABIN_HEIGHT * 0.7, CABIN_DEPTH * 0.9);
+                const screenOuterMesh = new THREE.Mesh(screenOuterGeometry, screenOuterMaterial);
+                screenGroup.add(screenOuterMesh);
+
+                // Bench seating part attached to the group
+                const BENCH_LENGTH = 1.2 * SCALE;
+                const BENCH_DEPTH = 0.4 * SCALE;
+                const benchSeatHeight = 0.1 * SCALE;
+                const benchSeatGeometry = new THREE.BoxGeometry(BENCH_LENGTH, benchSeatHeight, BENCH_DEPTH);
+                const benchSeatMesh = new THREE.Mesh(benchSeatGeometry, microgreenShelfMaterial); // Use seating material
+                benchSeatMesh.position.set(0, -halfHeight, 0); // Position at the bottom of the group
+                screenGroup.add(benchSeatMesh);
+                
+                // 3. FUNCTIONAL PANEL (Front Side: DAE/SOS) - Group
+                functionalGroup = new THREE.Group();
+                functionalGroup.userData.sideId = 'front';
+                functionalGroup.userData.originalPosition = new THREE.Vector3(0, halfHeight, halfDepth + 0.025 * SCALE);
+                functionalGroup.position.copy(functionalGroup.userData.originalPosition);
+                scene.add(functionalGroup);
+                allParts.push(functionalGroup);
+
+                // Functional outer panel
+                const functionalOuterGeometry = new THREE.BoxGeometry(CABIN_WIDTH * 0.9, CABIN_HEIGHT * 0.7, 0.05 * SCALE);
+                const functionalOuterMesh = new THREE.Mesh(functionalOuterGeometry, functionalBaseMaterial);
+                functionalGroup.add(functionalOuterMesh);
+
+                // DAE box (Red Cube)
+                const daeGeometry = new THREE.BoxGeometry(0.2 * SCALE, 0.3 * SCALE, 0.1 * SCALE);
+                const daeMesh = new THREE.Mesh(daeGeometry, daeMaterial);
+                daeMesh.position.set(0.3 * SCALE, 0.2 * SCALE, 0.05 * SCALE);
+                functionalGroup.add(daeMesh);
+                
+                // 4. MICROGREEN FARM (Back Side) - Group
+                microgreenGroup = new THREE.Group();
+                microgreenGroup.userData.sideId = 'back';
+                microgreenGroup.userData.originalPosition = new THREE.Vector3(0, halfHeight, -halfDepth - 0.025 * SCALE);
+                microgreenGroup.position.copy(microgreenGroup.userData.originalPosition);
+                scene.add(microgreenGroup);
+                allParts.push(microgreenGroup);
+
+                // Microgreen structural backing panel
+                const microgreenBackingGeometry = new THREE.BoxGeometry(CABIN_WIDTH * 0.9, CABIN_HEIGHT * 0.9, 0.05 * SCALE);
+                const microgreenBackingMesh = new THREE.Mesh(microgreenBackingGeometry, frameMaterial);
+                microgreenGroup.add(microgreenBackingMesh);
+
+                // Microgreen shelves (interior detail)
+                const shelfGeometry = new THREE.BoxGeometry(CABIN_WIDTH * 0.8, 0.02 * SCALE, 0.15 * SCALE);
+                const plantGeometry = new THREE.BoxGeometry(CABIN_WIDTH * 0.7, 0.05 * SCALE, 0.1 * SCALE);
+                
+                for (let i = 0; i < 4; i++) {
+                    const shelfMesh = new THREE.Mesh(shelfGeometry, microgreenShelfMaterial);
+                    const plantMesh = new THREE.Mesh(plantGeometry, greenPlantMaterial);
+                    
+                    const yPos = CABIN_HEIGHT * 0.9 * 0.4 - (i * (CABIN_HEIGHT * 0.9) / 4);
+                    
+                    shelfMesh.position.set(0, yPos, -0.05 * SCALE);
+                    plantMesh.position.set(0, yPos + 0.04 * SCALE, -0.05 * SCALE);
+                    
+                    microgreenGroup.add(shelfMesh);
+                    microgreenGroup.add(plantMesh);
+                }
+
+                // --- CONTROLS ---
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.05;
+                controls.minDistance = 2 * CABIN_HEIGHT;
+                controls.maxDistance = 6 * CABIN_HEIGHT;
+                controls.maxPolarAngle = Math.PI / 2;
+                controls.enableZoom = true;
+                controls.zoomSpeed = 1.2;
+
+                // Set initial target positions
+                allParts.forEach(part => {
+                    if (part.userData.originalPosition) {
+                        part.userData.targetPosition = part.userData.originalPosition.clone();
+                    }
+                });
+
+                // --- EVENT LISTENERS ---
+                window.addEventListener('resize', onWindowResize, false);
+                container.addEventListener('mousemove', onPointerMove);
+            }
+
+            function onWindowResize() {
+                width = container.clientWidth;
+                height = container.clientHeight;
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+            }
+            
+            function onPointerMove(event) {
+                const rect = container.getBoundingClientRect();
+                pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+            }
+
+            function updateHoverHighlight() {
+                raycaster.setFromCamera(pointer, camera);
+
+                // Intersect all top-level groups and the solar panel
+                const intersects = raycaster.intersectObjects(allParts, true);
+                
+                let currentIntersectedObject = null;
+                
+                if (intersects.length > 0) {
+                    let foundObject = intersects[0].object;
+                    // Traverse up to find the main part (Group or direct Mesh with sideId)
+                    while (foundObject.parent && foundObject.parent !== scene) {
+                        if (foundObject.userData.sideId) {
+                            break;
+                        }
+                        if (foundObject.parent.userData.sideId) {
+                            foundObject = foundObject.parent;
+                            break;
+                        }
+                        foundObject = foundObject.parent;
+                    }
+                    if (foundObject.userData.sideId) {
+                         currentIntersectedObject = foundObject;
+                    }
+                }
+                
+                if (highlightMesh !== currentIntersectedObject) {
+                    // Clear previous highlight
+                    if (highlightMesh && highlightMesh.userData.sideId) {
+                        const prevLabel = document.querySelector(`[data-side-id="${highlightMesh.userData.sideId}"]`);
+                        if (prevLabel) prevLabel.classList.remove('highlighted-label');
+                    }
+                    
+                    highlightMesh = currentIntersectedObject;
+
+                    // Apply new highlight
+                    if (highlightMesh && highlightMesh.userData.sideId) {
+                        const newLabel = document.querySelector(`[data-side-id="${highlightMesh.userData.sideId}"]`);
+                        if (newLabel) newLabel.classList.add('highlighted-label');
+                    }
+                }
+            }
+
+            function updateLabelPositions() {
+                const labeledObjects = {
+                    'front': functionalGroup,
+                    'left': mossGroup,
+                    'back': microgreenGroup,
+                    'right': screenGroup,
+                    'solar': solarMesh
+                };
+
+                const containerRect = container.getBoundingClientRect();
+
+                for (const sideId in labeledObjects) {
+                    const labelElement = document.querySelector(`[data-side-id="${sideId}"]`);
+                    const threeObject = labeledObjects[sideId];
+                    if (!labelElement || !threeObject) continue;
+
+                    const position = threeObject.position.clone();
+                    
+                    // Adjust position slightly outwards
+                    if (sideId === 'front') position.z += CABIN_DEPTH/2 + 0.1 * SCALE;
+                    else if (sideId === 'left') position.x -= CABIN_WIDTH/2 + 0.1 * SCALE;
+                    else if (sideId === 'right') position.x += CABIN_WIDTH/2 + 0.1 * SCALE;
+                    else if (sideId === 'back') position.z -= CABIN_DEPTH/2 + 0.1 * SCALE;
+                    else if (sideId === 'solar') position.y += CABIN_HEIGHT/2 + 0.1 * SCALE; 
+
+                    position.project(camera);
+
+                    const x = (position.x * 0.5 + 0.5) * containerRect.width;
+                    const y = (position.y * -0.5 + 0.5) * containerRect.height;
+
+                    labelElement.style.left = `${x}px`;
+                    labelElement.style.top = `${y}px`;
+                }
+            }
+            
+            // --- EXPLODE/CONTRACT ANIMATION LOGIC ---
+            function setExplodedView(side) {
+                const groups = [mossGroup, screenGroup, functionalGroup, microgreenGroup];
+                
+                groups.forEach(group => {
+                    group.userData.targetPosition.copy(group.userData.originalPosition);
+                });
+
+                let targetGroup = null;
+                let direction = '';
+
+                if (side === 'left') { targetGroup = mossGroup; direction = 'x-'; }
+                else if (side === 'right') { targetGroup = screenGroup; direction = 'x+'; }
+                else if (side === 'front') { targetGroup = functionalGroup; direction = 'z+'; }
+                else if (side === 'back') { targetGroup = microgreenGroup; direction = 'z-'; }
+                
+                if (targetGroup) {
+                    if (direction === 'x-') {
+                        targetGroup.userData.targetPosition.x -= explodeDistance;
+                        stateIndicator.textContent = "Sezione: Filtro GCS (Aria)";
+                    } else if (direction === 'x+') {
+                        targetGroup.userData.targetPosition.x += explodeDistance;
+                        stateIndicator.textContent = "Sezione: Schermo / USB / Panchina";
+                    } else if (direction === 'z+') {
+                        targetGroup.userData.targetPosition.z += explodeDistance;
+                        stateIndicator.textContent = "Sezione: DAE / SOS / Hardware";
+                    } else if (direction === 'z-') {
+                        targetGroup.userData.targetPosition.z -= explodeDistance;
+                        stateIndicator.textContent = "Sezione: Microgreen Farm";
+                    }
+                } else {
+                    stateIndicator.textContent = "Vista Normale";
+                }
+            }
+
+            function updateExplodeAnimation(delta) {
+                const speed = 5 * delta;
+                const groups = [mossGroup, screenGroup, functionalGroup, microgreenGroup];
+
+                groups.forEach(group => {
+                    group.position.lerp(group.userData.targetPosition, speed);
+                });
+            }
+
+            // --- ANIMATION LOOP ---
+            const clock = new THREE.Clock();
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                const delta = clock.getDelta();
+                controls.update();
+                updateExplodeAnimation(delta);
+                renderer.render(scene, camera);
+                updateLabelPositions();
+                updateHoverHighlight();
+            }
+
+            // --- UI EVENT LISTENERS ---
+            const controlButtons = document.querySelectorAll('#controls button');
+            controlButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const side = button.dataset.side;
+                    if (side === 'reset') {
+                        setExplodedView(null);
+                    } else {
+                        setExplodedView(side);
+                    }
+                });
+            });
+
+            // Start the animation on window load.
+            init();
+            animate();
+        };
+    </script>
+</body>
+</html>

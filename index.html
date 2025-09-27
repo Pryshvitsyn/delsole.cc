@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabine della Vita 2.0 - Proposta Interattiva</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; 
+            max-height: 400px;
+        }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        /* Custom Flow Diagram Styling (No SVG) */
+        .flow-step {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .flow-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(49, 130, 206, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Chosen Palette: Warm Neutrals (Gray/White) with Green/Blue Accents -->
+    <!-- Application Structure Plan: Dashboard approach with distinct, scrollable thematic sections (Overview, Technology, Impact, Design, Finance). This structure is chosen to guide the user (Comune/TIM) linearly through the proposal's evolution, from core concept to technological depth (GCS/Microgreen) and financial viability, prioritizing clarity and data synthesis. -->
+    <!-- Visualization & Content Choices: 
+    1. Overview Data -> Goal: Inform -> Viz: Dynamic Stats Cards -> Interaction: None -> Justification: Highlighting key metrics quickly -> Library/Method: HTML/JS.
+    2. Air Quality Impact -> Goal: Compare -> Viz: Bar Chart (Pollution vs. Filtered) -> Interaction: Segment Toggle -> Justification: Visualizing the effectiveness of GCS technology -> Library/Method: Chart.js.
+    3. Project Timeline -> Goal: Change (Time) -> Viz: Styled Timeline -> Interaction: None -> Justification: Clearly outlining implementation phases -> Library/Method: HTML/CSS.
+    4. GCS Filtration Process -> Goal: Organize/Inform -> Viz: Visual Flow Diagram (4 Steps) -> Interaction: Hover for detail -> Justification: Breaking down the core GCS technology into easily digestible steps -> Library/Method: HTML/CSS/JS (NO SVG/Mermaid).
+    5. Financial Model -> Goal: Inform/Organize -> Viz: Pie Chart (Revenue Split) -> Interaction: Hover for specific % -> Justification: Clear breakdown of the economic model -> Library/Method: Chart.js.
+    6. Design Section -> Goal: Organize/Engage -> Viz: Link to 3D Viewer -> Interaction: Button/Link -> Justification: Providing the most professional visual tool (Three.js) for design exploration.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-lg border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <h1 class="text-2xl font-extrabold text-green-700">Cabine della Vita 2.0</h1>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#overview" class="text-gray-600 hover:text-green-600 transition">Panoramica</a>
+                <a href="#technology" class="text-gray-600 hover:text-green-600 transition">Tecnologia Green</a>
+                <a href="#design" class="text-gray-600 hover:text-green-600 transition">Design 3D</a>
+                <a href="#impact" class="text-gray-600 hover:text-green-600 transition">Impatto Urbano</a>
+                <a href="#finance" class="text-gray-600 hover:text-green-600 transition">Modello Economico</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <!-- Hero Section -->
+        <section id="hero" class="text-center py-16 bg-white rounded-2xl shadow-xl mb-12">
+            <h2 class="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight">
+                Riconvertire il Passato, Costruire il Futuro
+            </h2>
+            <p class="mt-4 text-xl text-gray-500 max-w-3xl mx-auto">
+                Trasformazione delle vecchie cabine telefoniche in **Micro-Hub Urbani** multifunzionali: sicurezza, innovazione digitale e purificazione dell'aria.
+            </p>
+            <div class="mt-8">
+                <a href="#technology" class="inline-block bg-green-600 text-white text-lg font-semibold px-8 py-3 rounded-full hover:bg-green-700 transition duration-300 shadow-lg transform hover:scale-105">
+                    Esplora la Tecnologia Green &rarr;
+                </a>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section id="overview" class="py-12">
+            <h3 class="text-4xl font-bold text-center text-gray-800 mb-10">Panoramica del Progetto</h3>
+            <p class="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-10">
+                L'obiettivo è valorizzare il patrimonio esistente ($1m \times 1m \times 2.20m$) integrando servizi essenziali con soluzioni di sostenibilità all'avanguardia. La Cabina 2.0 è alimentata da **Pannelli Solari potenziati** con batteria interna.
+            </p>
+
+            <div class="grid md:grid-cols-4 gap-6 text-center">
+                <!-- Stat Card 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-green-500">
+                    <p class="text-4xl font-extrabold text-green-600" id="stat-air">82%</p>
+                    <p class="mt-2 text-gray-500 text-sm">Filtrazione PM (GCS)</p>
+                </div>
+                <!-- Stat Card 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
+                    <p class="text-4xl font-extrabold text-blue-600" id="stat-safety">DAE/SOS</p>
+                    <p class="mt-2 text-gray-500 text-sm">Sicurezza e Primo Soccorso</p>
+                </div>
+                <!-- Stat Card 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-yellow-500">
+                    <p class="text-4xl font-extrabold text-yellow-600" id="stat-yield">Microgreen</p>
+                    <p class="mt-2 text-gray-500 text-sm">Agricoltura Verticale Urbana</p>
+                </div>
+                <!-- Stat Card 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-gray-500">
+                    <p class="text-4xl font-extrabold text-gray-600" id="stat-digital">4G/Wi-Fi</p>
+                    <p class="mt-2 text-gray-500 text-sm">Connettività e Ricarica</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-12 border-gray-300">
+
+        <!-- Technology Section: GCS Clean Air Concept & Microgreen -->
+        <section id="technology" class="py-12">
+            <h3 class="text-4xl font-bold text-center text-gray-800 mb-10">Tecnologia Green Integrata</h3>
+            <p class="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-12">
+                Abbiamo potenziato la proposta integrando due soluzioni di sostenibilità: il sistema di **Moss Filter** di Green City Solutions (GCS) per la purificazione dell'aria esterna, e la **Microgreen Farm** per la produzione agricola verticale.
+            </p>
+
+            <div class="grid lg:grid-cols-2 gap-10">
+                <!-- GCS Filtration Process -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-green-200">
+                    <h4 class="text-2xl font-semibold text-green-700 mb-6">1. GCS Clean Air Concept (Filtrazione Esterna)</h4>
+                    <p class="text-gray-600 mb-6">
+                        L'aria pulita viene generata attraverso un sistema modulare basato su **muschi naturali** e tecnologia innovativa, capace di filtrare fino all'**82% del particolato fine** e di compensare annualmente fino a $342~kg$ di $\text{CO}_2$ equivalenti (stima GCS per unità simili).
+                    </p>
+
+                    <!-- Flow Diagram (HTML/CSS Based) -->
+                    <div class="space-y-4">
+                        <div class="flow-step bg-green-100 p-4 rounded-lg shadow-md hover:shadow-xl">
+                            <span class="font-bold text-green-800">STEP 1: Aspirazione</span>
+                            <p class="text-sm text-gray-700 mt-1">L'aria inquinata e calda viene aspirata dalle ventole integrate.</p>
+                        </div>
+                        <div class="flex justify-center"><span class="text-2xl text-green-500">↓</span></div>
+                        <div class="flow-step bg-green-100 p-4 rounded-lg shadow-md hover:shadow-xl">
+                            <span class="font-bold text-green-800">STEP 2: Purificazione e Raffreddamento</span>
+                            <p class="text-sm text-gray-700 mt-1">L'aria passa attraverso i moduli verticali di muschio, che filtrano il particolato (PM) e raffreddano l'aria per evaporazione.</p>
+                        </div>
+                        <div class="flex justify-center"><span class="text-2xl text-green-500">↓</span></div>
+                        <div class="flow-step bg-green-100 p-4 rounded-lg shadow-md hover:shadow-xl">
+                            <span class="font-bold text-green-800">STEP 3: Rilascio Aria Pulita</span>
+                            <p class="text-sm text-gray-700 mt-1">L'aria pulita e fresca viene rilasciata nell'ambiente circostante, creando un'oasi di aria pulita.</p>
+                        </div>
+                        <div class="flex justify-center"><span class="text-2xl text-green-500">↓</span></div>
+                        <div class="flow-step bg-green-100 p-4 rounded-lg shadow-md hover:shadow-xl">
+                            <span class="font-bold text-green-800">STEP 4: Monitoraggio IoT</span>
+                            <p class="text-sm text-gray-700 mt-1">Sensori integrati (AirCare System) misurano le performance e la qualità dell'aria in tempo reale, ottimizzando il sistema.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Microgreen Farm & Data -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-yellow-200">
+                    <h4 class="text-2xl font-semibold text-yellow-700 mb-6">2. Agricoltura Verticale (Microgreen Farm)</h4>
+                    <p class="text-gray-600 mb-6">
+                        Il lato posteriore della cabina ospita una piccola **Vertical Farm** per la coltivazione di microgreen (o ortaggi a foglia piccola), gestita da un mini-climatizzatore interno. Questo crea un micro-hub urbano per la produzione alimentare e la sensibilizzazione ambientale.
+                    </p>
+                    
+                    <div class="chart-container mb-8">
+                        <canvas id="airQualityChart"></canvas>
+                    </div>
+                    <div class="text-center">
+                        <button onclick="toggleChartData()" class="bg-blue-600 text-white text-sm px-4 py-2 rounded-full hover:bg-blue-700 transition shadow-md">Visualizza Impatto $\text{CO}_2$ vs. PM</button>
+                    </div>
+
+                    <p class="text-xs text-gray-500 mt-4">
+                        <span class="font-bold">Nota Tecnica:</span> Il sistema GCS e la Microgreen Farm operano in modo indipendente per massimizzare l'efficienza: GCS per la purificazione esterna dell'aria urbana, Microgreen per la produzione interna controllata.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <hr class="my-12 border-gray-300">
+
+        <!-- Design Section: 3D Model Integration -->
+        <section id="design" class="py-12 text-center">
+            <h3 class="text-4xl font-bold text-gray-800 mb-6">Design e Dettagli Tecnologici 3D</h3>
+            <p class="text-lg text-gray-600 max-w-4xl mx-auto mb-8">
+                Esplora il design modulare della Cabina 2.0, vedendo l'integrazione del **Pannello Solare**, del **Filtro GCS** e della **Microgreen Farm** attraverso un modello 3D interattivo e professionale.
+            </p>
+            
+            <a href="cabina_3d_viewer.html" target="_blank" class="inline-block bg-indigo-600 text-white text-xl font-semibold px-10 py-4 rounded-xl hover:bg-indigo-700 transition duration-300 shadow-xl transform hover:scale-105">
+                Apri il Modello 3D Interattivo (Three.js) &rarr;
+            </a>
+
+            <div class="text-sm text-gray-500 mt-4">
+                <p>Clicca per lanciare la simulazione 3D in una nuova finestra.</p>
+                <p>Utilizza lo scroll per lo zoom e i controlli per la vista in **sezione esplosa**.</p>
+            </div>
+        </section>
+
+        <hr class="my-12 border-gray-300">
+
+        <!-- Impact Section -->
+        <section id="impact" class="py-12">
+            <h3 class="text-4xl font-bold text-center text-gray-800 mb-10">Impatto Urbano e Sociale</h3>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="p-6 bg-white rounded-xl shadow-md">
+                    <div class="text-5xl mb-3 text-red-600">🚨</div>
+                    <h4 class="font-bold text-xl mb-2">Sicurezza Attiva</h4>
+                    <p class="text-gray-600 text-sm">DAE con gestione da remoto, Kit Primo Soccorso e pulsante SOS connesso a centrale operativa.</p>
+                </div>
+                <div class="p-6 bg-white rounded-xl shadow-md">
+                    <div class="text-5xl mb-3 text-green-600">🌿</div>
+                    <h4 class="font-bold text-xl mb-2">Sostenibilità & Salute</h4>
+                    <p class="text-gray-600 text-sm">Purificazione aria (GCS), energia solare autonoma, e contributo alla micro-biodiversità urbana.</p>
+                </div>
+                <div class="p-6 bg-white rounded-xl shadow-md">
+                    <div class="text-5xl mb-3 text-blue-600">💡</div>
+                    <h4 class="font-bold text-xl mb-2">Innovazione Digitale</h4>
+                    <p class="text-gray-600 text-sm">Schermi interattivi, Wi-Fi gratuito per la cittadinanza e sensori ambientali per dati in tempo reale.</p>
+                </div>
+            </div>
+        </section>
+        
+        <hr class="my-12 border-gray-300">
+
+        <!-- Finance Section -->
+        <section id="finance" class="py-12">
+            <h3 class="text-4xl font-bold text-center text-gray-800 mb-10">Modello Economico</h3>
+            <p class="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-12">
+                Il progetto è finanziariamente sostenibile. I ricavi principali derivano dalla gestione degli **spazi pubblicitari digitali** sui lati della cabina, coprendo costi di produzione, installazione e manutenzione.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div class="chart-container h-80">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <h4 class="text-2xl font-semibold text-gray-700 mb-4">Struttura dei Ricavi</h4>
+                    <ul class="space-y-3 text-gray-600">
+                        <li>**Ricavi Pubblicitari (Maggioranza):** Generati da schermi LED P2.5 sui lati.</li>
+                        <li>**Royalties per il Comune/Partner:** Percentuale variabile sui ricavi o canone fisso per l'uso del suolo.</li>
+                        <li>**Manutenzione:** Ordinaria coperta da sponsor/pubblicità.</li>
+                        <li>**Spazi Riservati:** $10\%$ degli spazi pubblicitari riservati all'ente partner (Comune/TIM).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-sm">
+            <p>&copy; 2025 Progetto Cabine della Vita 2.0 | Proposta per l'innovazione urbana.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js Configuration and Data
+        
+        const airData = {
+            labels: ['Particolato (PM)', 'Raffreddamento Aria', 'Compensazione $\text{CO}_2$'],
+            datasets: [{
+                label: 'Impatto Cabina 2.0 (Percentuale)',
+                data: [82, 40, 60], // 82% PM filtration (GCS claim), 40% coolness effect simulation, 60% CO2 reduction simulation
+                backgroundColor: [
+                    'rgba(52, 211, 153, 0.7)', 
+                    'rgba(96, 165, 250, 0.7)', 
+                    'rgba(16, 185, 129, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(52, 211, 153, 1)', 
+                    'rgba(96, 165, 250, 1)', 
+                    'rgba(16, 185, 129, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const airOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Impatto Ambientale Stimato della Cabina (Filtrazione GCS)',
+                    font: { size: 16 }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) label += ': ';
+                            label += context.parsed.y + (context.dataIndex === 0 ? '%' : (context.dataIndex === 1 ? ' (simulato)' : ' (kg CO2)'));
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'Valore (%)' },
+                    max: 100
+                }
+            }
+        };
+
+        const revenueData = {
+            labels: ['Royalties Partner (10-15%)', 'Ricavi Pubblicitari (Gestore)', 'Costi Operativi/Manutenzione'],
+            datasets: [{
+                data: [12.5, 67.5, 20], // Revenue Split Example
+                backgroundColor: [
+                    'rgba(245, 158, 11, 0.8)', // Yellow/Orange for Partner
+                    'rgba(22, 163, 74, 0.8)', // Green for Operator Revenue
+                    'rgba(107, 114, 128, 0.8)' // Grey for Costs
+                ],
+                hoverOffset: 15
+            }]
+        };
+
+        const revenueOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: { size: 14 }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Distribuzione Ricavi Netta (Esempio)',
+                    font: { size: 16 }
+                }
+            }
+        };
+        
+        let airChart;
+
+        function initCharts() {
+            // Air Quality Chart (Bar)
+            const ctxAir = document.getElementById('airQualityChart').getContext('2d');
+            airChart = new Chart(ctxAir, {
+                type: 'bar',
+                data: airData,
+                options: airOptions
+            });
+
+            // Revenue Chart (Doughnut)
+            const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctxRevenue, {
+                type: 'doughnut',
+                data: revenueData,
+                options: revenueOptions
+            });
+        }
+        
+        let currentAirChartMode = 'pm';
+        
+        function toggleChartData() {
+            if (currentAirChartMode === 'pm') {
+                // Switch to CO2 Annual Comparison
+                airChart.data.datasets[0].label = 'Compensazione $\text{CO}_2$ Annuale (kg)';
+                airChart.data.datasets[0].data = [342, 85, 25]; // 342kg GCS Max, 85kg GCS Min, 25kg standard tree
+                airChart.data.labels = ['Cabina 2.0 (Max)', 'Cabina 2.0 (Min)', 'Albero Medio Urbano'];
+                airChart.options.scales.y.title.text = 'Massa (kg CO2 eq.)';
+                airChart.options.scales.y.max = 400;
+                document.getElementById('stat-air').textContent = '342 kg';
+                document.querySelector('.text-sm.text-gray-500.mt-2').textContent = 'CO2 Equivalente Comp. (Max GCS)';
+                currentAirChartMode = 'co2';
+            } else {
+                // Switch back to PM/Cooling
+                airChart.data.datasets[0].label = 'Impatto Cabina 2.0 (Percentuale)';
+                airChart.data.datasets[0].data = [82, 40, 60];
+                airChart.data.labels = airData.labels;
+                airChart.options.scales.y.title.text = 'Valore (%)';
+                airChart.options.scales.y.max = 100;
+                document.getElementById('stat-air').textContent = '82%';
+                document.querySelector('.text-sm.text-gray-500.mt-2').textContent = 'Filtrazione PM (GCS)';
+                currentAirChartMode = 'pm';
+            }
+            airChart.update();
+        }
+
+        window.onload = initCharts;
+    </script>
+</body>
+</html>
