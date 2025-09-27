@@ -117,7 +117,7 @@
                     <!-- Feature 2 (New): Active Air Purification -->
                     <div class="feature-card p-6 bg-white rounded-xl shadow-lg border-t-4 border-emerald-700 bg-emerald-100">
                         <h4 class="text-2xl font-bold mb-2 text-emerald-800" data-lang-en="2. Active Air Purification & Sensors" data-lang-it="2. Purificazione Attiva dell'Aria e Sensori"></h4>
-                        <p class="text-gray-700 font-semibold" data-lang-en="Inspired by Green City Solutions, our moss-based system actively filters pollutants. Real-time sensors display $\text{CO}_2$, temperature, and air quality publicly. **Clean air is a public utility.**" data-lang-it="Ispirato da Green City Solutions, il nostro sistema a base di muschio filtra attivamente gli inquinanti. I sensori in tempo reale mostrano $\text{CO}_2$, temperatura e qualità dell'aria pubblicamente. **L'aria pulita è un servizio pubblico.**"></p>
+                        <p class="text-gray-700 font-semibold" data-lang-en="Inspired by Green City Solutions, our moss-based system actively filters pollutants. Real-time sensors display $\text{CO}_2$, temperature, and air quality publicly. **Clean air is a public utility.**" data-lang-it="Ispirato da Green City Solutions, il nostro sistema a base di muschio filtra attivamente gli inquinanti. Real-time sensors display $\text{CO}_2$, temperature, and air quality publicly. **Clean air is a public utility.**"></p>
                     </div>
 
                     <!-- Feature 3 (Old 1): Charging Stations -->
@@ -237,15 +237,18 @@
                 <!-- Video Placeholder - Crucial for Kickstarter -->
                 <div class="mt-16 text-center">
                     <h3 class="text-3xl font-bold mb-4 text-emerald-400" data-lang-en="Watch Our Project Video" data-lang-it="Guarda il Nostro Video di Progetto"></h3>
-                    <p class="text-lg text-gray-300 mb-6" data-lang-en="See the Cabin of Life 2.0 Kiosk in action in Rome’s Piazza Navona. (This is where your uploaded video will be embedded!)" data-lang-it="Guarda la Cabin of Life 2.0 Kiosk in azione a Piazza Navona a Roma. (Qui verrà incorporato il tuo video caricato!)"></p>
-                    <div class="bg-gray-700 h-64 md:h-96 rounded-xl flex items-center justify-center border-4 border-dashed border-emerald-500">
-                        <span class="text-2xl font-semibold text-emerald-300" data-lang-en="[KICKSTARTER VIDEO EMBED HERE]" data-lang-it="[INCORPORA IL VIDEO KICKSTARTER QUI]"></span>
+                    <p class="text-lg text-gray-300 mb-6" data-lang-en="See the Cabin of Life 2.0 Kiosk in action in Rome’s Piazza Navona." data-lang-it="Guarda la Cabin of Life 2.0 Kiosk in azione a Piazza Navona a Roma."></p>
+                    <div class="bg-gray-700 h-64 md:h-96 rounded-xl overflow-hidden shadow-2xl">
+                        <video class="w-full h-full object-cover" controls autoplay muted loop playsinline>
+                            <source src="rightTurn_Navona.MP4" type="video/mp4">
+                            <p data-lang-en="Your browser does not support the video tag." data-lang-it="Il tuo browser non supporta il tag video."></p>
+                        </video>
                     </div>
                 </div>
 
             </div>
         </section>
-        
+
         <!-- Rewards Section - NEW -->
         <section id="rewards-section" class="py-16 bg-white">
             <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
@@ -253,7 +256,7 @@
                 <p class="text-xl text-gray-600 mb-12" data-lang-en="Pledge today and see your name (or message!) light up the first **25 Cabins of Life** across Italy." data-lang-it="Sostieni oggi e vedi il tuo nome (o messaggio!) illuminare le prime **25 Cabine della Vita** in Italia."></p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    
+
                     <!-- Reward Tier 1: Seed Supporter -->
                     <div class="reward-card p-6 bg-gray-50 rounded-xl shadow-lg border-t-4 border-emerald-300">
                         <div>
@@ -267,7 +270,7 @@
                         </div>
                         <a href="#" class="mt-4 block px-4 py-3 text-center font-bold bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition" data-lang-en="Pledge €25" data-lang-it="Sostieni €25"></a>
                     </div>
-                    
+
                     <!-- Reward Tier 2: Visibility Builder (One-Time) -->
                     <div class="reward-card p-6 bg-white rounded-xl shadow-2xl border-t-4 border-emerald-500">
                         <div>
@@ -401,7 +404,7 @@
 
             // Initialize the content based on the default language (EN)
             // Run twice to properly initialize content and toggle state
-            switchLanguage(); 
+            switchLanguage();
             switchLanguage();
 
             // Add event listener to the button
