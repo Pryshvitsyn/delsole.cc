@@ -1,383 +1,420 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cabine della Vita 2.0 - Proposta Interattiva</title>
+    <title data-lang-en="Cabin of Life 2.0: The Urban Farm" data-lang-it="Cabin of Life 2.0: La Fattoria Urbana">Cabin of Life 2.0: The Urban Farm</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Use Inter font family -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px; 
-            max-height: 400px;
+        body { font-family: 'Inter', sans-serif; background-color: #f7fafc; }
+        .feature-card { transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
+        .diagram-item { position: relative; }
+        /* Custom styling for the energy flow diagram */
+        .diagram-line {
+            position: absolute;
+            height: 2px;
+            background-color: #10b981; /* Emerald 500 */
+            z-index: 10;
         }
-        @media (min-width: 768px) { .chart-container { height: 350px; } }
-        /* Custom Flow Diagram Styling (No SVG) */
-        .flow-step {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            cursor: pointer;
+        .animate-pulse-green { animation: pulse-green 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse-green {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
         }
-        .flow-step:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(49, 130, 206, 0.3);
+
+        /* Language control: elements with the current language tag are visible */
+        [data-lang="it"] { display: none; }
+        .lang-active [data-lang="it"] { display: block; }
+        .lang-active [data-lang="en"] { display: none; }
+
+        .hero-bg {
+            background-image: url('farView_microgreen.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 80vh; /* Responsive height */
+            min-height: 500px;
+        }
+        .section-header {
+            font-size: 2.25rem;
+            line-height: 1.2;
+        }
+        @media (min-width: 640px) {
+            .section-header {
+                font-size: 3rem;
+            }
+        }
+        .reward-card {
+            min-height: 280px; /* Ensure cards are uniform height */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="text-gray-800">
 
-    <!-- Chosen Palette: Warm Neutrals (Gray/White) with Green/Blue Accents -->
-    <!-- Application Structure Plan: Dashboard approach with distinct, scrollable thematic sections (Overview, Technology, Impact, Design, Finance). This structure is chosen to guide the user (Comune/TIM) linearly through the proposal's evolution, from core concept to technological depth (GCS/Microgreen) and financial viability, prioritizing clarity and data synthesis. -->
-    <!-- Visualization & Content Choices: 
-    1. Overview Data -> Goal: Inform -> Viz: Dynamic Stats Cards -> Interaction: None -> Justification: Highlighting key metrics quickly -> Library/Method: HTML/JS.
-    2. Air Quality Impact -> Goal: Compare -> Viz: Bar Chart (Pollution vs. Filtered) -> Interaction: Segment Toggle -> Justification: Visualizing the effectiveness of GCS technology -> Library/Method: Chart.js.
-    3. Project Timeline -> Goal: Change (Time) -> Viz: Styled Timeline -> Interaction: None -> Justification: Clearly outlining implementation phases -> Library/Method: HTML/CSS.
-    4. GCS Filtration Process -> Goal: Organize/Inform -> Viz: Visual Flow Diagram (4 Steps) -> Interaction: Hover for detail -> Justification: Breaking down the core GCS technology into easily digestible steps -> Library/Method: HTML/CSS/JS (NO SVG/Mermaid).
-    5. Financial Model -> Goal: Inform/Organize -> Viz: Pie Chart (Revenue Split) -> Interaction: Hover for specific % -> Justification: Clear breakdown of the economic model -> Library/Method: Chart.js.
-    6. Design Section -> Goal: Organize/Engage -> Viz: Link to 3D Viewer -> Interaction: Button/Link -> Justification: Providing the most professional visual tool (Three.js) for design exploration.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
-    <!-- Header & Navigation -->
-    <header class="sticky top-0 z-50 bg-white shadow-lg border-b border-gray-200">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
-            <h1 class="text-2xl font-extrabold text-green-700">Cabine della Vita 2.0</h1>
-            <nav class="hidden md:flex space-x-6 text-sm font-medium">
-                <a href="#overview" class="text-gray-600 hover:text-green-600 transition">Panoramica</a>
-                <a href="#technology" class="text-gray-600 hover:text-green-600 transition">Tecnologia Green</a>
-                <a href="#design" class="text-gray-600 hover:text-green-600 transition">Design 3D</a>
-                <a href="#impact" class="text-gray-600 hover:text-green-600 transition">Impatto Urbano</a>
-                <a href="#finance" class="text-gray-600 hover:text-green-600 transition">Modello Economico</a>
-            </nav>
-        </div>
-    </header>
-
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div id="app-content">
+        <!-- Navigation/Language Toggle -->
+        <header class="p-4 bg-white shadow-md sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <h1 class="text-2xl font-extrabold text-emerald-600">Cabin of Life 2.0</h1>
+                <button id="lang-toggle" class="px-4 py-2 bg-gray-100 rounded-full text-sm font-semibold hover:bg-gray-200 transition">
+                    <span data-lang-en="Switch to IT" data-lang-it="Passa a EN">Switch to IT</span>
+                </button>
+            </div>
+        </header>
 
         <!-- Hero Section -->
-        <section id="hero" class="text-center py-16 bg-white rounded-2xl shadow-xl mb-12">
-            <h2 class="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight">
-                Riconvertire il Passato, Costruire il Futuro
-            </h2>
-            <p class="mt-4 text-xl text-gray-500 max-w-3xl mx-auto">
-                Trasformazione delle vecchie cabine telefoniche in **Micro-Hub Urbani** multifunzionali: sicurezza, innovazione digitale e purificazione dell'aria.
-            </p>
-            <div class="mt-8">
-                <a href="#technology" class="inline-block bg-green-600 text-white text-lg font-semibold px-8 py-3 rounded-full hover:bg-green-700 transition duration-300 shadow-lg transform hover:scale-105">
-                    Esplora la Tecnologia Green &rarr;
-                </a>
+        <section class="hero-bg flex items-center justify-center text-white relative">
+            <!-- Overlay for better text readability -->
+            <div class="absolute inset-0 bg-gray-900 bg-opacity-70"></div>
+            <div class="relative text-center p-8 max-w-4xl">
+                <h2 class="section-header font-extrabold mb-4" data-lang-en="THE REVOLUTIONARY URBAN FARM IS HERE." data-lang-it="LA RIVOLUZIONARIA FATTORIA URBANA È QUI."></h2>
+                <p class="text-xl font-medium mb-8" data-lang-en="Transforming obsolete public spaces into decentralized teaching farms and air purifiers. Join the movement for **Food Security** and **Clean Air**." data-lang-it="Trasformiamo gli spazi pubblici obsoleti in fattorie didattiche decentralizzate e purificatori d'aria. Unisciti al movimento per la **Sicurezza Alimentare** e l'**Aria Pulita** (Cabin of Life)."></p>
+                <a href="#kickstarter-cta" class="inline-block px-12 py-4 text-xl font-bold bg-emerald-500 rounded-full shadow-lg hover:bg-emerald-600 transition transform hover:scale-105" data-lang-en="Build the First 25 Cabins!" data-lang-it="Costruisci le Prime 25 Cabine!"></a>
+                <p class="mt-4 text-sm font-semibold" data-lang-en="Limited Early Bird Rewards Available!" data-lang-it="Premi in edizione limitata per i primi sostenitori disponibili!"></p>
             </div>
         </section>
 
-        <!-- Overview Section -->
-        <section id="overview" class="py-12">
-            <h3 class="text-4xl font-bold text-center text-gray-800 mb-10">Panoramica del Progetto</h3>
-            <p class="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-10">
-                L'obiettivo è valorizzare il patrimonio esistente ($1m \times 1m \times 2.20m$) integrando servizi essenziali con soluzioni di sostenibilità all'avanguardia. La Cabina 2.0 è alimentata da **Pannelli Solari potenziati** con batteria interna.
-            </p>
-
-            <div class="grid md:grid-cols-4 gap-6 text-center">
-                <!-- Stat Card 1 -->
-                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-green-500">
-                    <p class="text-4xl font-extrabold text-green-600" id="stat-air">82%</p>
-                    <p class="mt-2 text-gray-500 text-sm">Filtrazione PM (GCS)</p>
-                </div>
-                <!-- Stat Card 2 -->
-                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
-                    <p class="text-4xl font-extrabold text-blue-600" id="stat-safety">DAE/SOS</p>
-                    <p class="mt-2 text-gray-500 text-sm">Sicurezza e Primo Soccorso</p>
-                </div>
-                <!-- Stat Card 3 -->
-                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-yellow-500">
-                    <p class="text-4xl font-extrabold text-yellow-600" id="stat-yield">Microgreen</p>
-                    <p class="mt-2 text-gray-500 text-sm">Agricoltura Verticale Urbana</p>
-                </div>
-                <!-- Stat Card 4 -->
-                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-gray-500">
-                    <p class="text-4xl font-extrabold text-gray-600" id="stat-digital">4G/Wi-Fi</p>
-                    <p class="mt-2 text-gray-500 text-sm">Connettività e Ricarica</p>
-                </div>
-            </div>
-        </section>
-
-        <hr class="my-12 border-gray-300">
-
-        <!-- Technology Section: GCS Clean Air Concept & Microgreen -->
-        <section id="technology" class="py-12">
-            <h3 class="text-4xl font-bold text-center text-gray-800 mb-10">Tecnologia Green Integrata</h3>
-            <p class="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-12">
-                Abbiamo potenziato la proposta integrando due soluzioni di sostenibilità: il sistema di **Moss Filter** di Green City Solutions (GCS) per la purificazione dell'aria esterna, e la **Microgreen Farm** per la produzione agricola verticale.
-            </p>
-
-            <div class="grid lg:grid-cols-2 gap-10">
-                <!-- GCS Filtration Process -->
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-green-200">
-                    <h4 class="text-2xl font-semibold text-green-700 mb-6">1. GCS Clean Air Concept (Filtrazione Esterna)</h4>
-                    <p class="text-gray-600 mb-6">
-                        L'aria pulita viene generata attraverso un sistema modulare basato su **muschi naturali** e tecnologia innovativa, capace di filtrare fino all'**82% del particolato fine** e di compensare annualmente fino a $342~kg$ di $\text{CO}_2$ equivalenti (stima GCS per unità simili).
-                    </p>
-
-                    <!-- Flow Diagram (HTML/CSS Based) -->
-                    <div class="space-y-4">
-                        <div class="flow-step bg-green-100 p-4 rounded-lg shadow-md hover:shadow-xl">
-                            <span class="font-bold text-green-800">STEP 1: Aspirazione</span>
-                            <p class="text-sm text-gray-700 mt-1">L'aria inquinata e calda viene aspirata dalle ventole integrate.</p>
-                        </div>
-                        <div class="flex justify-center"><span class="text-2xl text-green-500">↓</span></div>
-                        <div class="flow-step bg-green-100 p-4 rounded-lg shadow-md hover:shadow-xl">
-                            <span class="font-bold text-green-800">STEP 2: Purificazione e Raffreddamento</span>
-                            <p class="text-sm text-gray-700 mt-1">L'aria passa attraverso i moduli verticali di muschio, che filtrano il particolato (PM) e raffreddano l'aria per evaporazione.</p>
-                        </div>
-                        <div class="flex justify-center"><span class="text-2xl text-green-500">↓</span></div>
-                        <div class="flow-step bg-green-100 p-4 rounded-lg shadow-md hover:shadow-xl">
-                            <span class="font-bold text-green-800">STEP 3: Rilascio Aria Pulita</span>
-                            <p class="text-sm text-gray-700 mt-1">L'aria pulita e fresca viene rilasciata nell'ambiente circostante, creando un'oasi di aria pulita.</p>
-                        </div>
-                        <div class="flex justify-center"><span class="text-2xl text-green-500">↓</span></div>
-                        <div class="flow-step bg-green-100 p-4 rounded-lg shadow-md hover:shadow-xl">
-                            <span class="font-bold text-green-800">STEP 4: Monitoraggio IoT</span>
-                            <p class="text-sm text-gray-700 mt-1">Sensori integrati (AirCare System) misurano le performance e la qualità dell'aria in tempo reale, ottimizzando il sistema.</p>
-                        </div>
+        <!-- Problem & Solution Section -->
+        <section class="py-16 bg-white">
+            <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-left">
+                        <h3 class="text-3xl font-bold text-red-600 mb-4" data-lang-en="The Problem: Air Pollution & Food Scarcity" data-lang-it="Il Problema: Inquinamento Atmosferico e Scarsità Alimentare"></h3>
+                        <p class="text-lg mb-4" data-lang-en="Our cities are struggling with polluted air and a growing disconnect from sustainable food sources. Across Italy, decommissioned public payphones (over $16,000$ units) leave behind valuable urban spots that must be reclaimed for meaningful public utility." data-lang-it="Le nostre città sono alle prese con l'aria inquinata e una crescente disconnessione dalle fonti alimentari sostenibili. In Italia, i telefoni pubblici dismessi (oltre $16.000$ unità) lasciano preziosi spazi urbani che devono essere riconvertiti in servizi di pubblica utilità significativi."></p>
+                        <p class="text-lg mb-6 font-semibold" data-lang-en="We need infrastructure that actively cleans our environment and teaches citizens how to grow their own food through efficient, future-proof hydroponic technology." data-lang-it="Abbiamo bisogno di infrastrutture che puliscano attivamente il nostro ambiente e insegnino ai cittadini come coltivare il proprio cibo attraverso una tecnologia idroponica efficiente e a prova di futuro."></p>
+                    </div>
+                    <div>
+                        <img src="view_microgreen.jpg" alt="Cabin of Life Kiosk with visible microgreen vertical farm" class="rounded-xl shadow-2xl w-full h-auto object-cover">
                     </div>
                 </div>
 
-                <!-- Microgreen Farm & Data -->
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-yellow-200">
-                    <h4 class="text-2xl font-semibold text-yellow-700 mb-6">2. Agricoltura Verticale (Microgreen Farm)</h4>
-                    <p class="text-gray-600 mb-6">
-                        Il lato posteriore della cabina ospita una piccola **Vertical Farm** per la coltivazione di microgreen (o ortaggi a foglia piccola), gestita da un mini-climatizzatore interno. Questo crea un micro-hub urbano per la produzione alimentare e la sensibilizzazione ambientale.
-                    </p>
+                <div class="mt-12 pt-12 border-t border-gray-200">
+                     <h3 class="text-4xl font-extrabold text-emerald-600 mb-4" data-lang-en="The Solution: Cabin of Life 2.0" data-lang-it="La Soluzione: Cabin of Life 2.0"></h3>
+                     <p class="text-2xl text-gray-600" data-lang-en="A modular, solar-powered Smart City Utility and Vertical Farm that purifies air and cultivates urban food security." data-lang-it="Un'utilità Smart City modulare e una Fattoria Verticale alimentata a energia solare che purifica l'aria e coltiva la sicurezza alimentare urbana."></p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Features Section (The 10 Points - Re-prioritized) -->
+        <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <h2 class="section-header text-center font-bold mb-12 text-gray-800" data-lang-en="10 Essential Services for the Future City" data-lang-it="10 Servizi Essenziali per la Città del Futuro"></h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Feature 1 (New): Decentralized Vertical Farm -->
+                    <div class="feature-card p-6 bg-white rounded-xl shadow-lg border-t-4 border-emerald-700 bg-emerald-100">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-800" data-lang-en="1. Decentralized Vertical Farm & Education Hub" data-lang-it="1. Fattoria Verticale Decentralizzata e Hub Didattico"></h4>
+                        <p class="text-gray-700 font-semibold" data-lang-en="The core mission: Utilizing advanced hydroponics, we grow nutrient-rich microgreens in the city center. This feature *demonstrates and teaches* cutting-edge sustainable farming to combat global food insecurity." data-lang-it="La missione principale: Utilizzando l'idroponica avanzata, coltiviamo microgreens ricchi di nutrienti nel centro città. Questa funzione *dimostra e insegna* l'agricoltura sostenibile all'avanguardia per combattere l'insicurezza alimentare globale."></p>
+                    </div>
+
+                    <!-- Feature 2 (New): Active Air Purification -->
+                    <div class="feature-card p-6 bg-white rounded-xl shadow-lg border-t-4 border-emerald-700 bg-emerald-100">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-800" data-lang-en="2. Active Air Purification & Sensors" data-lang-it="2. Purificazione Attiva dell'Aria e Sensori"></h4>
+                        <p class="text-gray-700 font-semibold" data-lang-en="Inspired by Green City Solutions, our moss-based system actively filters pollutants. Real-time sensors display $\text{CO}_2$, temperature, and air quality publicly. **Clean air is a public utility.**" data-lang-it="Ispirato da Green City Solutions, il nostro sistema a base di muschio filtra attivamente gli inquinanti. I sensori in tempo reale mostrano $\text{CO}_2$, temperatura e qualità dell'aria pubblicamente. **L'aria pulita è un servizio pubblico.**"></p>
+                    </div>
+
+                    <!-- Feature 3 (Old 1): Charging Stations -->
+                    <div class="feature-card p-6 bg-white rounded-xl shadow-lg border-t-4 border-emerald-500">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-600" data-lang-en="3. Fast Charging Stations" data-lang-it="3. Stazioni di Ricarica Veloce"></h4>
+                        <p class="text-gray-600" data-lang-en="Multiple, secure ports (USB-A, USB-C, and Wireless) for fast charging on the go. Essential connectivity for the modern traveler." data-lang-it="Porte multiple e sicure (USB-A, USB-C e Wireless) per la ricarica veloce. Connettività essenziale per il viaggiatore moderno."></p>
+                    </div>
+
+                    <!-- Feature 4 (Old 2): Free City Wi-Fi Hub -->
+                    <div class="feature-card p-6 bg-white rounded-xl shadow-lg border-t-4 border-emerald-500">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-600" data-lang-en="4. Free City Wi-Fi Hub" data-lang-it="4. Hub Wi-Fi Cittadino Gratuito"></h4>
+                        <p class="text-gray-600" data-lang-en="High-speed, smart Wi-Fi access for everyone. Bridging the digital divide and keeping tourists connected with minimal fuss." data-lang-it="Accesso Wi-Fi intelligente e ad alta velocità per tutti. Colmare il divario digitale e mantenere i turisti connessi con il minimo sforzo."></p>
+                    </div>
+
+                    <!-- Feature 5 (Old 3): Interactive Navigation Screen -->
+                    <div class="feature-card p-6 bg-white rounded-xl shadow-lg border-t-4 border-emerald-500">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-600" data-lang-en="5. Interactive Navigation Screen" data-lang-it="5. Schermo di Navigazione Interattivo"></h4>
+                        <p class="text-gray-600" data-lang-en="A durable touchscreen for real-time maps: find transit, restrooms, local businesses, and key attractions instantly." data-lang-it="Un touchscreen resistente per mappe in tempo reale: trova trasporti, servizi igienici, attività commerciali e attrazioni chiave all'istante."></p>
+                    </div>
+
+                    <!-- Feature 6 (Old 4): Emergency Call Button -->
+                    <div class="feature-card p-6 bg-white rounded-xl shadow-lg border-t-4 border-red-500">
+                        <h4 class="text-2xl font-bold mb-2 text-red-600" data-lang-en="6. Emergency SOS Button" data-lang-it="6. Pulsante di Emergenza SOS"></h4>
+                        <p class="text-gray-600" data-lang-en="A discreet, direct-line SOS button connecting instantly to emergency services. A vital public safety enhancement, especially at night." data-lang-it="Un pulsante SOS discreto e diretto che si collega istantaneamente ai servizi di emergenza. Un miglioramento vitale della sicurezza pubblica, soprattutto di notte."></p>
+                    </div>
+
+                    <!-- Feature 7 (Old 6): QR Codes for Local Discounts -->
+                    <div class="feature-card p-6 bg-white rounded-xl shadow-lg border-t-4 border-emerald-500">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-600" data-lang-en="7. Local Discount QR Codes" data-lang-it="7. Codici QR per Sconti Locali"></h4>
+                        <p class="text-gray-600" data-lang-en="Dynamic QR codes offering instant discounts at partner cafes, museums, and shops. Driving foot traffic to local businesses." data-lang-it="Codici QR dinamici che offrono sconti immediati presso caffè, musei e negozi partner. Guidare il traffico pedonale verso le attività commerciali locali."></p>
+                    </div>
+
+                    <!-- Feature 8 (Old 7): Smart Lockers -->
+                    <div class="feature-card p-6 bg-white rounded-xl shadow-lg border-t-4 border-emerald-500">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-600" data-lang-en="8. Secure Smart Lockers" data-lang-it="8. Armadietti Intelligenti Sicuri"></h4>
+                        <p class="text-gray-600" data-lang-en="Tiny, secure, SMS/QR-verified lockers to leave devices charging safely for short periods. Freedom to explore hands-free." data-lang-it="Armadietti piccoli, sicuri e verificati tramite SMS/QR per lasciare i dispositivi in carica in sicurezza per brevi periodi. Libertà di esplorare a mani libere."></p>
+                    </div>
+
+                    <!-- Feature 9 (Old 8): Augmented Reality (AR) City Guide -->
+                    <div class="feature-card p-6 bg-white rounded-xl shadow-lg border-t-4 border-emerald-500">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-600" data-lang-en="9. AR City Guide & Learning Tool" data-lang-it="9. Guida della Città in AR e Strumento Didattico"></h4>
+                        <p class="text-gray-600" data-lang-en="Scan the Cabin to access a virtual guide (history, tips) and educational modules on hydroponics and sustainability." data-lang-it="Scansiona la Cabina per accedere a una guida virtuale (storia, consigli) e a moduli educativi su idroponica e sostenibilità."></p>
+                    </div>
+
+                    <!-- Feature 10 (Old 10): Solar Panels for Energy -->
+                    <div class="feature-card p-6 bg-white rounded-xl shadow-lg border-t-4 border-emerald-500">
+                        <h4 class="text-2xl font-bold mb-2 text-emerald-600" data-lang-en="10. Solar Energy Power" data-lang-it="10. Alimentazione a Energia Solare"></h4>
+                        <p class="text-gray-600" data-lang-en="Thin, discreet solar panels on the roof help power the lighting, Wi-Fi, charging, **and the vertical farm system**—ensuring maximum eco-friendly status." data-lang-it="Pannelli solari sottili e discreti sul tetto aiutano ad alimentare l'illuminazione, il Wi-Fi, la ricarica **e il sistema di fattoria verticale**—garantendo il massimo dello stato ecologico."></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology & Diagram Section -->
+        <section class="py-16 bg-gray-900 text-white">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <h2 class="section-header text-center font-bold mb-12 text-emerald-400" data-lang-en="The Technology: Sustainable and Smart" data-lang-it="La Tecnologia: Sostenibile e Intelligente"></h2>
+
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="view_microgreen.jpg" alt="Close-up view of the Cabin of Life 2.0 Kiosk showing microgreens and screen" class="rounded-xl shadow-2xl w-full h-auto object-cover">
+                    </div>
+                    <div class="space-y-8">
+                        <h3 class="text-3xl font-semibold mb-4" data-lang-en="Powering the City, Sustainably" data-lang-it="Alimentare la Città, in Modo Sostenibile"></h3>
+
+                        <!-- Energy Flow Diagram (Conceptual using CSS/Tailwind) -->
+                        <div class="relative p-6 border-2 border-emerald-500 rounded-xl bg-gray-800">
+                            <h4 class="text-xl font-bold mb-4 text-emerald-400" data-lang-en="Energy Flow Diagram" data-lang-it="Diagramma del Flusso Energetico"></h4>
+
+                            <div class="grid grid-cols-5 items-center justify-between text-center">
+                                <!-- 1. Solar Panels -->
+                                <div class="diagram-item">
+                                    <svg class="h-10 w-10 text-yellow-400 mx-auto mb-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1012 22A10 10 0 1012 2zM12 20a8 8 0 118-8A8 8 0 0112 20zm0-16a.5.5 0 01.5.5V11h5.5a.5.5 0 010 1h-6.5a.5.5 0 01-.5-.5V4.5a.5.5 0 01.5-.5z"/></svg>
+                                    <p class="text-sm" data-lang-en="Solar Panels" data-lang-it="Pannelli Solari"></p>
+                                </div>
+                                <!-- Arrow 1 -->
+                                <div class="col-span-1 flex items-center justify-center">
+                                    <div class="w-full h-1 bg-emerald-500 animate-pulse-green relative rounded-full"></div>
+                                    <span class="text-emerald-500 text-2xl -ml-2">&#8594;</span>
+                                </div>
+                                <!-- 2. Battery Storage -->
+                                <div class="diagram-item">
+                                    <svg class="h-10 w-10 text-gray-400 mx-auto mb-1" fill="currentColor" viewBox="0 0 24 24"><path d="M16 4H8C6.89 4 6 4.89 6 6V18C6 19.11 6.89 20 8 20H16C17.11 20 18 19.11 18 18V6C18 4.89 17.11 4 16 4ZM17 18C17 18.55 16.55 19 16 19H8C7.45 19 7 18.55 7 18V6C7 5.45 7.45 5 8 5H16C16.55 5 17 5.45 17 6V18ZM10 6H14V7H10V6Z"/></svg>
+                                    <p class="text-sm" data-lang-en="Battery Storage" data-lang-it="Accumulo Batteria"></p>
+                                </div>
+                                <!-- Arrow 2 -->
+                                <div class="col-span-1 flex items-center justify-center">
+                                    <div class="w-full h-1 bg-emerald-500 animate-pulse-green relative rounded-full"></div>
+                                    <span class="text-emerald-500 text-2xl -ml-2">&#8594;</span>
+                                </div>
+                                <!-- 3. Services -->
+                                <div class="diagram-item">
+                                    <svg class="h-10 w-10 text-blue-400 mx-auto mb-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                                    <p class="text-sm" data-lang-en="Farm, Wi-Fi, Charging" data-lang-it="Fattoria, Wi-Fi, Ricarica"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Technical Highlights -->
+                        <ul class="space-y-3 text-lg">
+                            <li class="flex items-start">
+                                <span class="text-emerald-500 font-bold mr-3 mt-1">&#10003;</span>
+                                <span data-lang-en="**Hydroponic System:** The vertical farm uses water-efficient hydroponic or aeroponic techniques, requiring $90\%$ less water than traditional farming to grow highly nutritious microgreens." data-lang-it="**Sistema Idroponico:** La fattoria verticale utilizza tecniche idroponiche o aeroponiche a basso consumo idrico, che richiedono il $90\%$ di acqua in meno rispetto all'agricoltura tradizionale per coltivare microgreens altamente nutrienti."></span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-emerald-500 font-bold mr-3 mt-1">&#10003;</span>
+                                <span data-lang-en="**IoT Integration:** Air quality, usage, and plant health sensors provide real-time data for both public display and optimized maintenance." data-lang-it="**Integrazione IoT:** I sensori di qualità dell'aria, di utilizzo e di salute delle piante forniscono dati in tempo reale sia per la visualizzazione pubblica che per la manutenzione ottimizzata."></span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-emerald-500 font-bold mr-3 mt-1">&#10003;</span>
+                                <span data-lang-en="**Biophillic Design:** Leveraging proven technology for passive air filtration, the moss walls and microgreens contribute directly to improving local air quality." data-lang-it="**Design Biofilico:** Sfruttando la tecnologia collaudata per la filtrazione passiva dell'aria, le pareti di muschio e i microgreens contribuiscono direttamente a migliorare la qualità dell'aria locale."></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Video Placeholder - Crucial for Kickstarter -->
+                <div class="mt-16 text-center">
+                    <h3 class="text-3xl font-bold mb-4 text-emerald-400" data-lang-en="Watch Our Project Video" data-lang-it="Guarda il Nostro Video di Progetto"></h3>
+                    <p class="text-lg text-gray-300 mb-6" data-lang-en="See the Cabin of Life 2.0 Kiosk in action in Rome’s Piazza Navona. (This is where your uploaded video will be embedded!)" data-lang-it="Guarda la Cabin of Life 2.0 Kiosk in azione a Piazza Navona a Roma. (Qui verrà incorporato il tuo video caricato!)"></p>
+                    <div class="bg-gray-700 h-64 md:h-96 rounded-xl flex items-center justify-center border-4 border-dashed border-emerald-500">
+                        <span class="text-2xl font-semibold text-emerald-300" data-lang-en="[KICKSTARTER VIDEO EMBED HERE]" data-lang-it="[INCORPORA IL VIDEO KICKSTARTER QUI]"></span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- Rewards Section - NEW -->
+        <section id="rewards-section" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+                <h2 class="section-header font-bold mb-4 text-gray-800" data-lang-en="Choose Your Reward Tier" data-lang-it="Scegli il Tuo Livello di Ricompensa"></h2>
+                <p class="text-xl text-gray-600 mb-12" data-lang-en="Pledge today and see your name (or message!) light up the first **25 Cabins of Life** across Italy." data-lang-it="Sostieni oggi e vedi il tuo nome (o messaggio!) illuminare le prime **25 Cabine della Vita** in Italia."></p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     
-                    <div class="chart-container mb-8">
-                        <canvas id="airQualityChart"></canvas>
+                    <!-- Reward Tier 1: Seed Supporter -->
+                    <div class="reward-card p-6 bg-gray-50 rounded-xl shadow-lg border-t-4 border-emerald-300">
+                        <div>
+                            <h3 class="text-2xl font-extrabold text-emerald-600 mb-2" data-lang-en="Seed Supporter" data-lang-it="Sostenitore Seme"></h3>
+                            <p class="text-4xl font-black mb-4 text-gray-900" data-lang-en="€25 / $25" data-lang-it="€25 / $25"></p>
+                            <p class="text-gray-700 mb-4" data-lang-en="Get exclusive digital content and project updates." data-lang-it="Ottieni contenuti digitali esclusivi e aggiornamenti sul progetto."></p>
+                            <ul class="text-sm text-left text-gray-600 space-y-1">
+                                <li>&#10003; <span data-lang-en="Digital Backer Badge" data-lang-it="Badge Digitale del Sostenitore"></span></li>
+                                <li>&#10003; <span data-lang-en="Early Access to AR Guide" data-lang-it="Accesso Anticipato alla Guida AR"></span></li>
+                            </ul>
+                        </div>
+                        <a href="#" class="mt-4 block px-4 py-3 text-center font-bold bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition" data-lang-en="Pledge €25" data-lang-it="Sostieni €25"></a>
                     </div>
-                    <div class="text-center">
-                        <button onclick="toggleChartData()" class="bg-blue-600 text-white text-sm px-4 py-2 rounded-full hover:bg-blue-700 transition shadow-md">Visualizza Impatto $\text{CO}_2$ vs. PM</button>
+                    
+                    <!-- Reward Tier 2: Visibility Builder (One-Time) -->
+                    <div class="reward-card p-6 bg-white rounded-xl shadow-2xl border-t-4 border-emerald-500">
+                        <div>
+                            <h3 class="text-2xl font-extrabold text-emerald-700 mb-2" data-lang-en="Visibility Builder" data-lang-it="Costruttore di Visibilità"></h3>
+                            <p class="text-4xl font-black mb-4 text-gray-900" data-lang-en="€75 / $75" data-lang-it="€75 / $75"></p>
+                            <p class="text-gray-700 mb-4 font-semibold" data-lang-en="Screen Solution 1: One-Time Display" data-lang-it="Soluzione Schermo 1: Visualizzazione Unica"></p>
+                            <ul class="text-sm text-left text-gray-600 space-y-1">
+                                <li>&#10003; <span data-lang-en="All previous rewards" data-lang-it="Tutte le ricompense precedenti"></span></li>
+                                <li>&#10003; <span data-lang-en="Your name displayed on 1 Kiosk." data-lang-it="Il tuo nome visualizzato su 1 Kiosk."></span></li>
+                                <li>&#10003; <span data-lang-en="One-time, high-visibility spot for 7 days." data-lang-it="Spot unico, alta visibilità per 7 giorni."></span></li>
+                            </ul>
+                        </div>
+                         <a href="#" class="mt-4 block px-4 py-3 text-center font-bold bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition" data-lang-en="Pledge €75" data-lang-it="Sostieni €75"></a>
                     </div>
 
-                    <p class="text-xs text-gray-500 mt-4">
-                        <span class="font-bold">Nota Tecnica:</span> Il sistema GCS e la Microgreen Farm operano in modo indipendente per massimizzare l'efficienza: GCS per la purificazione esterna dell'aria urbana, Microgreen per la produzione interna controllata.
-                    </p>
-                </div>
-            </div>
-        </section>
-        
-        <hr class="my-12 border-gray-300">
+                    <!-- Reward Tier 3: Impact Amplifier (2/3/4-Solution Placeholder) -->
+                    <div class="reward-card p-6 bg-white rounded-xl shadow-2xl border-t-4 border-emerald-700">
+                        <div>
+                            <h3 class="text-2xl font-extrabold text-emerald-800 mb-2" data-lang-en="Impact Amplifier" data-lang-it="Amplificatore di Impatto"></h3>
+                            <p class="text-4xl font-black mb-4 text-gray-900" data-lang-en="€250 / $250" data-lang-it="€250 / $250"></p>
+                            <p class="text-gray-700 mb-4 font-semibold" data-lang-en="Screen Solution 2-3: Multi-Kiosk Exposure" data-lang-it="Soluzione Schermo 2-3: Esposizione Multi-Kiosk"></p>
+                            <ul class="text-sm text-left text-gray-600 space-y-1">
+                                <li>&#10003; <span data-lang-en="All previous rewards" data-lang-it="Tutte le ricompense precedenti"></span></li>
+                                <li>&#10003; <span data-lang-en="Your name/message on 5 Kiosks." data-lang-it="Il tuo nome/messaggio su 5 Kiosks."></span></li>
+                                <li>&#10003; <span data-lang-en="Displayed 3 times daily for 3 months." data-lang-it="Visualizzato 3 volte al giorno per 3 mesi."></span></li>
+                            </ul>
+                        </div>
+                        <a href="#" class="mt-4 block px-4 py-3 text-center font-bold bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition" data-lang-en="Pledge €250" data-lang-it="Sostieni €250"></a>
+                    </div>
 
-        <!-- Design Section: 3D Model Integration -->
-        <section id="design" class="py-12 text-center">
-            <h3 class="text-4xl font-bold text-gray-800 mb-6">Design e Dettagli Tecnologici 3D</h3>
-            <p class="text-lg text-gray-600 max-w-4xl mx-auto mb-8">
-                Esplora il design modulare della Cabina 2.0, vedendo l'integrazione del **Pannello Solare**, del **Filtro GCS** e della **Microgreen Farm** attraverso un modello 3D interattivo e professionale.
-            </p>
-            
-            <a href="cabina_3d_viewer.html" target="_blank" class="inline-block bg-indigo-600 text-white text-xl font-semibold px-10 py-4 rounded-xl hover:bg-indigo-700 transition duration-300 shadow-xl transform hover:scale-105">
-                Apri il Modello 3D Interattivo (Three.js) &rarr;
-            </a>
-
-            <div class="text-sm text-gray-500 mt-4">
-                <p>Clicca per lanciare la simulazione 3D in una nuova finestra.</p>
-                <p>Utilizza lo scroll per lo zoom e i controlli per la vista in **sezione esplosa**.</p>
-            </div>
-        </section>
-
-        <hr class="my-12 border-gray-300">
-
-        <!-- Impact Section -->
-        <section id="impact" class="py-12">
-            <h3 class="text-4xl font-bold text-center text-gray-800 mb-10">Impatto Urbano e Sociale</h3>
-            <div class="grid md:grid-cols-3 gap-8 text-center">
-                <div class="p-6 bg-white rounded-xl shadow-md">
-                    <div class="text-5xl mb-3 text-red-600">🚨</div>
-                    <h4 class="font-bold text-xl mb-2">Sicurezza Attiva</h4>
-                    <p class="text-gray-600 text-sm">DAE con gestione da remoto, Kit Primo Soccorso e pulsante SOS connesso a centrale operativa.</p>
-                </div>
-                <div class="p-6 bg-white rounded-xl shadow-md">
-                    <div class="text-5xl mb-3 text-green-600">🌿</div>
-                    <h4 class="font-bold text-xl mb-2">Sostenibilità & Salute</h4>
-                    <p class="text-gray-600 text-sm">Purificazione aria (GCS), energia solare autonoma, e contributo alla micro-biodiversità urbana.</p>
-                </div>
-                <div class="p-6 bg-white rounded-xl shadow-md">
-                    <div class="text-5xl mb-3 text-blue-600">💡</div>
-                    <h4 class="font-bold text-xl mb-2">Innovazione Digitale</h4>
-                    <p class="text-gray-600 text-sm">Schermi interattivi, Wi-Fi gratuito per la cittadinanza e sensori ambientali per dati in tempo reale.</p>
-                </div>
-            </div>
-        </section>
-        
-        <hr class="my-12 border-gray-300">
-
-        <!-- Finance Section -->
-        <section id="finance" class="py-12">
-            <h3 class="text-4xl font-bold text-center text-gray-800 mb-10">Modello Economico</h3>
-            <p class="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-12">
-                Il progetto è finanziariamente sostenibile. I ricavi principali derivano dalla gestione degli **spazi pubblicitari digitali** sui lati della cabina, coprendo costi di produzione, installazione e manutenzione.
-            </p>
-            
-            <div class="grid md:grid-cols-2 gap-10 items-center">
-                <div class="chart-container h-80">
-                    <canvas id="revenueChart"></canvas>
-                </div>
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-                    <h4 class="text-2xl font-semibold text-gray-700 mb-4">Struttura dei Ricavi</h4>
-                    <ul class="space-y-3 text-gray-600">
-                        <li>**Ricavi Pubblicitari (Maggioranza):** Generati da schermi LED P2.5 sui lati.</li>
-                        <li>**Royalties per il Comune/Partner:** Percentuale variabile sui ricavi o canone fisso per l'uso del suolo.</li>
-                        <li>**Manutenzione:** Ordinaria coperta da sponsor/pubblicità.</li>
-                        <li>**Spazi Riservati:** $10\%$ degli spazi pubblicitari riservati all'ente partner (Comune/TIM).</li>
-                    </ul>
+                    <!-- Reward Tier 4: Legacy Patron (Premium) -->
+                    <div class="reward-card p-6 bg-white rounded-xl shadow-2xl border-t-4 border-emerald-900">
+                        <div>
+                            <h3 class="text-2xl font-extrabold text-emerald-900 mb-2" data-lang-en="Legacy Patron" data-lang-it="Patrono dell'Eredità"></h3>
+                            <p class="text-4xl font-black mb-4 text-gray-900" data-lang-en="€1,000+ / $1,000+" data-lang-it="€1.000+ / $1.000+"></p>
+                            <p class="text-gray-700 mb-4 font-semibold" data-lang-en="Screen Solution 4: Permanent & Premium" data-lang-it="Soluzione Schermo 4: Permanente e Premium"></p>
+                            <ul class="text-sm text-left text-gray-600 space-y-1">
+                                <li>&#10003; <span data-lang-en="All previous rewards" data-lang-it="Tutte le ricompense precedenti"></span></li>
+                                <li>&#10003; <span data-lang-en="Your name/logo on all 25 Cabins." data-lang-it="Il tuo nome/logo su tutte le 25 Cabine."></span></li>
+                                <li>&#10003; <span data-lang-en="Permanent recognition plaque on one unit." data-lang-it="Targa di riconoscimento permanente su un'unità."></span></li>
+                            </ul>
+                        </div>
+                        <a href="#" class="mt-4 block px-4 py-3 text-center font-bold bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition" data-lang-en="Pledge €1,000+" data-lang-it="Sostieni €1.000+"></a>
+                    </div>
                 </div>
             </div>
         </section>
 
-    </main>
+        <!-- Kickstarter Call to Action (Sticky Element on Mobile) -->
+        <section id="kickstarter-cta" class="py-12 bg-emerald-600 text-white shadow-xl">
+            <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+                <h2 class="text-4xl font-extrabold mb-4" data-lang-en="Help Us Build the First 25 Cabins of Life!" data-lang-it="Aiutaci a Costruire le Prime 25 Cabine della Vita!"></h2>
+                <p class="text-xl mb-8" data-lang-en="We need your support to finalize production, install the first **25 units** in key Italian cities, and seed the future of global urban farming." data-lang-it="Abbiamo bisogno del tuo sostegno per finalizzare la produzione, installare le prime **25 unità** nelle principali città italiane e seminare il futuro dell'agricoltura urbana globale."></p>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white mt-12">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-sm">
-            <p>&copy; 2025 Progetto Cabine della Vita 2.0 | Proposta per l'innovazione urbana.</p>
-        </div>
-    </footer>
+                <!-- Kickstarter Pledge Button -->
+                <button class="w-full md:w-auto px-16 py-5 text-2xl font-bold bg-yellow-400 text-gray-900 rounded-full shadow-2xl hover:bg-yellow-300 transition transform hover:scale-105 uppercase tracking-wider">
+                    <span data-lang-en="Pledge Now & Get Exclusive Perks!" data-lang-it="Contribuisci Ora e Ottieni Vantaggi Esclusivi!"></span>
+                </button>
+                <p class="mt-4 text-sm font-medium" data-lang-en="The next generation of Smart City utility starts with you." data-lang-it="La prossima generazione di utilità Smart City inizia con te."></p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 bg-gray-800 text-center text-gray-400 text-sm">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <p>&copy; <span id="current-year"></span> Cabin of Life 2.0 Project. | <span data-lang-en="Kickstarter Campaign Launching Soon." data-lang-it="Campagna Kickstarter in Lancio a Breve."></span></p>
+                <div class="mt-2 space-x-4">
+                    <a href="#" class="hover:text-white" data-lang-en="Contact" data-lang-it="Contatti"></a>
+                    <a href="#" class="hover:text-white" data-lang-en="Partnerships" data-lang-it="Partnership"></a>
+                    <a href="#" class="hover:text-white" data-lang-en="Press Kit" data-lang-it="Rassegna Stampa"></a>
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <script>
-        // Chart.js Configuration and Data
-        
-        const airData = {
-            labels: ['Particolato (PM)', 'Raffreddamento Aria', 'Compensazione $\text{CO}_2$'],
-            datasets: [{
-                label: 'Impatto Cabina 2.0 (Percentuale)',
-                data: [82, 40, 60], // 82% PM filtration (GCS claim), 40% coolness effect simulation, 60% CO2 reduction simulation
-                backgroundColor: [
-                    'rgba(52, 211, 153, 0.7)', 
-                    'rgba(96, 165, 250, 0.7)', 
-                    'rgba(16, 185, 129, 0.7)'
-                ],
-                borderColor: [
-                    'rgba(52, 211, 153, 1)', 
-                    'rgba(96, 165, 250, 1)', 
-                    'rgba(16, 185, 129, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
+        document.addEventListener('DOMContentLoaded', () => {
+            const appContent = document.getElementById('app-content');
+            const langToggle = document.getElementById('lang-toggle');
+            const langToggleText = langToggle.querySelector('span');
+            const currentYear = document.getElementById('current-year');
+            currentYear.textContent = new Date().getFullYear();
 
-        const airOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: 'Impatto Ambientale Stimato della Cabina (Filtrazione GCS)',
-                    font: { size: 16 }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) label += ': ';
-                            label += context.parsed.y + (context.dataIndex === 0 ? '%' : (context.dataIndex === 1 ? ' (simulato)' : ' (kg CO2)'));
-                            return label;
+            // Set initial language to English (default)
+            let isItalian = false;
+
+            // Function to update the toggle button text
+            function updateToggleText() {
+                if (isItalian) {
+                    langToggleText.textContent = langToggleText.getAttribute('data-lang-it');
+                    // Change the button text itself, using attributes on the span
+                    langToggleText.setAttribute('data-lang-en', 'Passa a EN');
+                    langToggleText.setAttribute('data-lang-it', 'Passa a EN');
+                } else {
+                    langToggleText.textContent = langToggleText.getAttribute('data-lang-en');
+                    // Change the button text itself, using attributes on the span
+                    langToggleText.setAttribute('data-lang-en', 'Switch to IT');
+                    langToggleText.setAttribute('data-lang-it', 'Switch to IT');
+                }
+            }
+
+            // Function to switch language
+            function switchLanguage() {
+                isItalian = !isItalian;
+                if (isItalian) {
+                    appContent.classList.add('lang-active');
+                    document.documentElement.lang = 'it';
+                } else {
+                    appContent.classList.remove('lang-active');
+                    document.documentElement.lang = 'en';
+                }
+                updateToggleText();
+
+                // Update text content for all elements with data-lang attributes
+                document.querySelectorAll('[data-lang-en], [data-lang-it]').forEach(el => {
+                    const key = isItalian ? 'data-lang-it' : 'data-lang-en';
+                    if (el.hasAttribute(key)) {
+                        // Special handling for content inside tags that might contain markdown/HTML (like the ul items)
+                        const content = el.getAttribute(key);
+                        if (content && content.includes('**')) {
+                             // Simple bold replacement for list items
+                            el.innerHTML = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                        } else {
+                            // Standard text content update
+                            el.textContent = content;
                         }
+
                     }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: { display: true, text: 'Valore (%)' },
-                    max: 100
-                }
+                });
             }
-        };
 
-        const revenueData = {
-            labels: ['Royalties Partner (10-15%)', 'Ricavi Pubblicitari (Gestore)', 'Costi Operativi/Manutenzione'],
-            datasets: [{
-                data: [12.5, 67.5, 20], // Revenue Split Example
-                backgroundColor: [
-                    'rgba(245, 158, 11, 0.8)', // Yellow/Orange for Partner
-                    'rgba(22, 163, 74, 0.8)', // Green for Operator Revenue
-                    'rgba(107, 114, 128, 0.8)' // Grey for Costs
-                ],
-                hoverOffset: 15
-            }]
-        };
+            // Initialize the content based on the default language (EN)
+            // Run twice to properly initialize content and toggle state
+            switchLanguage(); 
+            switchLanguage();
 
-        const revenueOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        font: { size: 14 }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Distribuzione Ricavi Netta (Esempio)',
-                    font: { size: 16 }
-                }
-            }
-        };
-        
-        let airChart;
+            // Add event listener to the button
+            langToggle.addEventListener('click', switchLanguage);
 
-        function initCharts() {
-            // Air Quality Chart (Bar)
-            const ctxAir = document.getElementById('airQualityChart').getContext('2d');
-            airChart = new Chart(ctxAir, {
-                type: 'bar',
-                data: airData,
-                options: airOptions
-            });
-
-            // Revenue Chart (Doughnut)
-            const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
-            new Chart(ctxRevenue, {
-                type: 'doughnut',
-                data: revenueData,
-                options: revenueOptions
-            });
-        }
-        
-        let currentAirChartMode = 'pm';
-        
-        function toggleChartData() {
-            if (currentAirChartMode === 'pm') {
-                // Switch to CO2 Annual Comparison
-                airChart.data.datasets[0].label = 'Compensazione $\text{CO}_2$ Annuale (kg)';
-                airChart.data.datasets[0].data = [342, 85, 25]; // 342kg GCS Max, 85kg GCS Min, 25kg standard tree
-                airChart.data.labels = ['Cabina 2.0 (Max)', 'Cabina 2.0 (Min)', 'Albero Medio Urbano'];
-                airChart.options.scales.y.title.text = 'Massa (kg CO2 eq.)';
-                airChart.options.scales.y.max = 400;
-                document.getElementById('stat-air').textContent = '342 kg';
-                document.querySelector('.text-sm.text-gray-500.mt-2').textContent = 'CO2 Equivalente Comp. (Max GCS)';
-                currentAirChartMode = 'co2';
+            // Set initial text for button manually
+            if (isItalian) {
+                 langToggleText.textContent = 'Passa a EN';
             } else {
-                // Switch back to PM/Cooling
-                airChart.data.datasets[0].label = 'Impatto Cabina 2.0 (Percentuale)';
-                airChart.data.datasets[0].data = [82, 40, 60];
-                airChart.data.labels = airData.labels;
-                airChart.options.scales.y.title.text = 'Valore (%)';
-                airChart.options.scales.y.max = 100;
-                document.getElementById('stat-air').textContent = '82%';
-                document.querySelector('.text-sm.text-gray-500.mt-2').textContent = 'Filtrazione PM (GCS)';
-                currentAirChartMode = 'pm';
+                 langToggleText.textContent = 'Switch to IT';
             }
-            airChart.update();
-        }
-
-        window.onload = initCharts;
+        });
     </script>
+
 </body>
 </html>
