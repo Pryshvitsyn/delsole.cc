@@ -26,18 +26,21 @@
             width: 100%;
             height: 85vh;
             overflow: hidden;
+            background-color: #000;
         }
-        #hero-video {
+        .hero-video-container {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
             z-index: 1;
-            transform: translateX(-50%) translateY(-50%);
-            background-size: cover;
+        }
+        .hero-video-container video {
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
         }
         .video-overlay {
             position: absolute;
@@ -45,7 +48,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.2));
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.3));
             z-index: 2;
         }
         .hero-content {
@@ -91,7 +94,7 @@
     <header class="bg-slate-900/70 backdrop-blur-xl border-b border-slate-700/50 shadow-sm sticky top-0 z-40">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#">
-                <img src="Elio_Genesis.jpg" alt="Elio Genesis Corporation Logo" class="h-10">
+                <img src="Elio_Genesis.png" alt="Elio Genesis Corporation Logo" class="h-10">
             </a>
             <div class="hidden md:flex space-x-8">
                 <a href="#smart-hubs" data-key="navSmartHubs" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Smart Hubs</a>
@@ -135,10 +138,16 @@
     <main>
         <!-- Hero Section with Video -->
         <section id="video-hero">
-            <video autoplay loop muted playsinline id="hero-video">
-                <source src="round.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <div class="hero-video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="green_transformation.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video autoplay loop muted playsinline>
+                    <source src="round.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
             <div class="video-overlay"></div>
             <div class="hero-content h-full flex items-center justify-center text-white text-center">
                  <div class="container mx-auto px-6">
@@ -164,29 +173,14 @@
 
 
         <!-- The Smart Hubs Section -->
-        <section id="smart-hubs" class="py-20 bg-slate-900/50 fade-in-section">
+        <section id="smart-hubs" class="py-24 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6">
-                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <!-- Left Column: Text -->
-                    <div>
-                        <h2 data-key="transformationTitle" class="section-title !text-left">Proposition 1: The Smart Urban Hub</h2>
-                        <p data-key="transformationSubtitle" class="section-subtitle !text-left !max-w-none !mx-0">
-                            We propose the "Cabina del Futuro," a complete overhaul of the phone booth's functionality. Each unit will become a self-sufficient, solar-powered smart node equipped with a range of essential modern services.
-                        </p>
-                        <div id="smart-hub-features-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                            <!-- Cards will be populated by JS -->
-                        </div>
-                    </div>
-                    <!-- Right Column: Video -->
-                    <div class="rounded-lg shadow-lg overflow-hidden h-full">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                            <source src="green_transformation.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
+                 <h2 data-key="transformationTitle" class="section-title">Proposition 1: The Smart Urban Hub</h2>
+                 <p data-key="transformationSubtitle" class="section-subtitle">
+                    We propose the "Cabina del Futuro," a complete overhaul of the phone booth's functionality. Each unit will become a self-sufficient, solar-powered smart node equipped with a range of essential modern services.
+                 </p>
 
-                <div class="mt-20">
+                <div class="mt-16">
                      <h3 data-key="propositionsTitle" class="text-3xl font-bold text-white mb-4 text-center">Configurations for Every Need</h3>
                     <p data-key="propositionsSubtitle" class="section-subtitle">
                         The Smart Urban Hub is not a one-size-fits-all solution. We propose several models that can be deployed based on the specific needs of a location.
@@ -208,11 +202,19 @@
                         </div>
                     </div>
                 </div>
+
+                 <div class="mt-20">
+                    <h3 data-key="standardFeaturesTitle" class="text-3xl font-bold text-white mb-12 text-center">Standard Features in Every Hub</h3>
+                    <div id="smart-hub-features-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                        <!-- Cards will be populated by JS -->
+                    </div>
+                </div>
+
             </div>
         </section>
 
         <!-- Bio-Tech Solutions Section -->
-        <section id="bio-tech" class="py-20 bg-slate-900 fade-in-section">
+        <section id="bio-tech" class="py-24 bg-slate-900 fade-in-section">
             <div class="container mx-auto px-6">
                 <h2 data-key="greenSolutionsTitle" class="section-title">Proposition 2: Bio-Tech Air Solutions</h2>
                 <p data-key="greenSolutionsSubtitle" class="section-subtitle">
@@ -222,9 +224,9 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <!-- Image Gallery -->
                     <div class="grid grid-cols-2 gap-4">
-                        <img src="roma1 (2).jpg" alt="Green city solution with a bench" class="rounded-lg shadow-lg w-full h-full object-cover col-span-2 transform hover:scale-105 transition-transform duration-300">
-                        <img src="roma1 (1).jpg" alt="Green city advertising stand design" class="rounded-lg shadow-lg w-full h-full object-cover transform hover:scale-105 transition-transform duration-300">
-                        <img src="roma1 (3).jpg" alt="Green city advertising stand with SPQR design" class="rounded-lg shadow-lg w-full h-full object-cover transform hover:scale-105 transition-transform duration-300">
+                        <img src="roma1 (2).png" alt="Green city solution with a bench" class="rounded-lg shadow-lg w-full h-full object-cover col-span-2 transform hover:scale-105 transition-transform duration-300">
+                        <img src="roma1 (1).png" alt="Green city advertising stand design" class="rounded-lg shadow-lg w-full h-full object-cover transform hover:scale-105 transition-transform duration-300">
+                        <img src="roma1 (3).png" alt="Green city advertising stand with SPQR design" class="rounded-lg shadow-lg w-full h-full object-cover transform hover:scale-105 transition-transform duration-300">
                     </div>
                     <!-- Text Content -->
                     <div class="text-content">
@@ -238,13 +240,13 @@
         </section>
 
         <!-- Rooftop Farming Section -->
-        <section id="rooftop-farming" class="py-20 bg-slate-900/50 fade-in-section">
+        <section id="rooftop-farming" class="py-24 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6">
                 <h2 data-key="rooftopFarmingTitle" class="section-title">Proposition 3: Rooftop Farming</h2>
                 <p data-key="rooftopFarmingSubtitle" class="section-subtitle">
                     We transform unused rooftop technical rooms into indoor farms, creating a profitable, scalable urban farming model.
                 </p>
-                <p data-key="rooftopFarmingIntro" class="text-center max-w-4xl mx-auto text-slate-300 -mt-8 mb-12"></p>
+                <p data-key="rooftopFarmingIntro" class="text-center max-w-4xl mx-auto text-slate-300 mb-12"></p>
                 
                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <!-- Text Content -->
@@ -314,7 +316,7 @@
     <!-- Footer -->
     <footer class="bg-slate-900 border-t border-slate-800 py-6">
         <div class="container mx-auto px-6 flex flex-col sm:flex-row justify-center items-center text-center text-slate-500 gap-4">
-            <img src="Elio_Genesis.jpg" alt="Elio Genesis Corporation Logo" class="h-12">
+            <img src="Elio_Genesis.png" alt="Elio Genesis Corporation Logo" class="h-12">
             <div>
                  <p data-key="footerRights">&copy; 2025 Elio Genesis Corporation. All Rights Reserved.</p>
                  <p data-key="footerSlogan" class="text-sm mt-1">Pioneering Green Technology for Urban Environments.</p>
@@ -343,6 +345,7 @@
                 ],
                 propositionsTitle: "Configurations for Every Need",
                 propositionsSubtitle: "The Smart Urban Hub is not a one-size-fits-all solution. We propose several models that can be deployed based on the specific needs of a location.",
+                standardFeaturesTitle: "Standard Features in Every Hub",
                 touristHubTitle: "The Tourist Hub",
                 touristHubDesc: "Located in high-traffic tourist areas like Piazza Navona or near the Colosseum. It prioritizes services for visitors.",
                 communityHubTitle: "The Community Hub",
@@ -360,7 +363,9 @@
                     { title: "Taxi Call Button", desc: "Instantly call for a taxi with a single press." },
                     { title: "IoT Environmental Sensors", desc: "Collect real-time data on air quality, noise, and temperature." },
                     { title: "Interactive City Kiosk", desc: "Touchscreens for maps, transport, and local events." },
-                    { title: "Emergency Call Point", desc: "A one-touch button to connect with emergency services." }
+                    { title: "Emergency Call Point", desc: "A one-touch button to connect with emergency services." },
+                    { title: "Integrated Air Filtration", desc: "Built-in filters actively purify the surrounding air, reducing pollutants." },
+                    { title: "Microgreen Vending", desc: "A small, automated stand offering fresh, locally grown microgreens." }
                 ],
                 touristHubFeatures: ["Multi-language Information Kiosk", "Public Wi-Fi & Device Charging", "Ticket Vending for attractions/transport", "Secure Lockers"],
                 communityHubFeatures: ["Digital Community Noticeboard", "Air Quality & Noise Sensors", "Tool/Book Sharing Library Access", "Emergency Call Point", "Public Access Defibrillator (AED)", "First-Aid Kit"],
@@ -394,6 +399,7 @@
                 ],
                 propositionsTitle: "Configurazioni per Ogni Esigenza",
                 propositionsSubtitle: "L'Hub Urbano Intelligente non è una soluzione unica. Proponiamo diversi modelli che possono essere implementati in base alle esigenze specifiche di una località.",
+                standardFeaturesTitle: "Funzionalità Standard in Ogni Hub",
                 touristHubTitle: "L'Hub Turistico",
                 touristHubDesc: "Situato in aree turistiche ad alto traffico come Piazza Navona o vicino al Colosseo. Dà priorità ai servizi per i visitatori.",
                 communityHubTitle: "L'Hub di Comunità",
@@ -411,7 +417,9 @@
                     { title: "Pulsante Chiamata Taxi", desc: "Chiama istantaneamente un taxi con un solo pulsante." },
                     { title: "Sensori Ambientali IoT", desc: "Raccogliere dati in tempo reale su qualità dell'aria, rumore e temperatura." },
                     { title: "Chiosco Cittadino Interattivo", desc: "Touchscreen per mappe, trasporti ed eventi locali." },
-                    { title: "Punto di Chiamata d'Emergenza", desc: "Un pulsante one-touch per connettersi con i servizi di emergenza." }
+                    { title: "Punto di Chiamata d'Emergenza", desc: "Un pulsante one-touch per connettersi con i servizi di emergenza." },
+                    { title: "Filtrazione Aria Integrata", desc: "Filtri integrati purificano attivamente l'aria circostante, riducendo gli inquinanti." },
+                    { title: "Distributore di Micro-ortaggi", desc: "Un piccolo stand automatizzato che offre micro-ortaggi freschi e coltivati localmente." }
                 ],
                 touristHubFeatures: ["Chiosco informativo multilingue", "Wi-Fi pubblico e ricarica dispositivi", "Vendita biglietti per attrazioni/trasporti", "Armadietti sicuri"],
                 communityHubFeatures: ["Bacheca digitale di comunità", "Sensori di qualità dell'aria e rumore", "Accesso a libreria condivisa di attrezzi/libri", "Punto di chiamata d'emergenza", "Defibrillatore Pubblico (DAE)", "Kit di Pronto Soccorso"],
@@ -445,6 +453,7 @@
                 ],
                 propositionsTitle: "Конфигурации для любых нужд",
                 propositionsSubtitle: "Умный городской узел — это не универсальное решение. Мы предлагаем несколько моделей, которые могут быть развернуты в зависимости от конкретных потребностей местоположения.",
+                standardFeaturesTitle: "Стандартные функции в каждом хабе",
                 touristHubTitle: "Туристический центр",
                 touristHubDesc: "Расположен в туристических зонах с высокой проходимостью, таких как Пьяцца Навона или рядом с Колизеем. Приоритет отдается услугам для посетителей.",
                 communityHubTitle: "Общественный центр",
@@ -462,7 +471,9 @@
                     { title: "Кнопка вызова такси", desc: "Мгновенный вызов такси одним нажатием." },
                     { title: "Датчики среды IoT", desc: "Сбор данных в реальном времени о качестве воздуха, шуме и температуре." },
                     { title: "Интерактивный городской киоск", desc: "Сенсорные экраны для карт, транспорта и местных событий." },
-                    { title: "Пункт экстренного вызова", desc: "Кнопка для связи со службами экстренной помощи." }
+                    { title: "Пункт экстренного вызова", desc: "Кнопка для связи со службами экстренной помощи." },
+                    { title: "Встроенная фильтрация воздуха", desc: "Встроенные фильтры активно очищают окружающий воздух, снижая уровень загрязнителей." },
+                    { title: "Продажа микрозелени", desc: "Небольшой автоматизированный стенд, предлагающий свежую, локально выращенную микрозелень." }
                 ],
                 touristHubFeatures: ["Многоязычный информационный киоск", "Общественный Wi-Fi и зарядка устройств", "Продажа билетов на аттракционы/транспорт", "Безопасные ячейки"],
                 communityHubFeatures: ["Цифровая доска объявлений", "Датчики качества воздуха и шума", "Доступ к библиотеке обмена инструментами/книгами", "Пункт экстренного вызова", "Общедоступный дефибриллятор (АНД)", "Аптечка первой помощи"],
@@ -488,7 +499,9 @@
             "Emergency Call Point": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
             "Taxi Call Button": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M21 17H3v-2a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2z"/><circle cx="6.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/><path d="M5 13l-1-4h16l-1 4H5z"/></svg>`,
             "Public Access Defibrillator (AED)": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/><path d="M12 11l-2 4h4l-2 4"/></svg>`,
-            "First-Aid Kit": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M8 11h8"/><path d="M12 7v8"/></svg>`
+            "First-Aid Kit": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M8 11h8"/><path d="M12 7v8"/></svg>`,
+            "Integrated Air Filtration": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M3 12h18M3 6h18M3 18h18"/></svg>`,
+            "Microgreen Vending": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`
         };
         const greenBenefitIcons = {
             "Cleaner Air & Better Health": `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 flex-shrink-0 mr-4"><path d="M12.5 2.5a2.5 2.5 0 0 0-5 0v1.7a2.5 2.5 0 0 0 5 0V2.5z"></path><path d="M12.5 19.5a2.5 2.5 0 0 0-5 0v1.7a2.5 2.5 0 0 0 5 0v-1.7z"></path><path d="M2.5 12.5a2.5 2.5 0 0 0 0-5h-1.7a2.5 2.5 0 0 0 0 5h1.7z"></path><path d="M19.5 12.5a2.5 2.5 0 0 0 0-5h1.7a2.5 2.5 0 0 0 0 5h-1.7z"></path></svg>`,
@@ -605,4 +618,3 @@
     </script>
 </body>
 </html>
-
