@@ -75,13 +75,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .logo-grayscale {
-            filter: grayscale(100%) contrast(120%) brightness(80%);
-            transition: filter 0.3s ease;
-        }
-        .logo-grayscale:hover {
-            filter: grayscale(0%);
-        }
     </style>
 </head>
 
@@ -90,8 +83,8 @@
     <!-- Header & Navigation -->
     <header class="bg-slate-900/70 backdrop-blur-xl border-b border-slate-700/50 shadow-sm sticky top-0 z-40">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#">
-                <img src="Elio_Genesis.jpg" alt="Elio Genesis Corporation Logo" class="h-10">
+            <a href="#" class="text-xl font-bold text-white tracking-wider">
+                ELIO GENESIS CORPORATION
             </a>
             <div class="hidden md:flex space-x-8">
                 <a href="#smart-hubs" data-key="navSmartHubs" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Smart Hubs</a>
@@ -136,7 +129,7 @@
         <!-- Hero Section with Video -->
         <section id="video-hero">
             <video autoplay loop muted playsinline id="hero-video">
-                <source src="round.mp4" type="video/mp4">
+                <source src="green_transformation.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div class="video-overlay"></div>
@@ -148,42 +141,15 @@
             </div>
         </section>
 
-        <!-- Our Partners Section -->
-        <section id="partners" class="py-16 bg-slate-900 fade-in-section">
-            <div class="container mx-auto px-6">
-                <h3 data-key="partnersTitle" class="text-center text-slate-400 font-bold tracking-wider mb-8">Our Success is Built on a Foundation of Diverse Expertise</h3>
-                <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-8">
-                    <img src="EMI.jpg" alt="EMI Logo" class="h-12 logo-grayscale">
-                    <img src="green_chief.jpg" alt="Green Chief Logo" class="h-12 logo-grayscale">
-                    <img src="greencity.jpg" alt="Greencity Solutions Logo" class="h-10 logo-grayscale">
-                    <img src="sos_soluzione.jpg" alt="SOS Soluzione Logo" class="h-16 logo-grayscale">
-                    <img src="TGSimon.jpg" alt="TG Simon Logo" class="h-8 logo-grayscale">
-                </div>
-            </div>
-        </section>
-
-
         <!-- The Smart Hubs Section -->
         <section id="smart-hubs" class="py-20 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6">
-                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <!-- Left Column: Text -->
-                    <div>
-                        <h2 data-key="transformationTitle" class="section-title !text-left">Proposition 1: The Smart Urban Hub</h2>
-                        <p data-key="transformationSubtitle" class="section-subtitle !text-left !max-w-none !mx-0">
-                            We propose the "Cabina del Futuro," a complete overhaul of the phone booth's functionality. Each unit will become a self-sufficient, solar-powered smart node equipped with a range of essential modern services.
-                        </p>
-                        <div id="smart-hub-features-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                            <!-- Cards will be populated by JS -->
-                        </div>
-                    </div>
-                    <!-- Right Column: Video -->
-                    <div class="rounded-lg shadow-lg overflow-hidden h-full">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                            <source src="green_transformation.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
+                <h2 data-key="transformationTitle" class="section-title">Proposition 1: The Smart Urban Hub</h2>
+                <p data-key="transformationSubtitle" class="section-subtitle">
+                    We propose the "Cabina del Futuro," a complete overhaul of the phone booth's functionality. Each unit will become a self-sufficient, solar-powered smart node equipped with a range of essential modern services.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Cards will be populated by JS -->
                 </div>
 
                 <div class="mt-20">
@@ -242,10 +208,8 @@
             <div class="container mx-auto px-6">
                 <h2 data-key="rooftopFarmingTitle" class="section-title">Proposition 3: Rooftop Farming</h2>
                 <p data-key="rooftopFarmingSubtitle" class="section-subtitle">
-                    We transform unused rooftop technical rooms into indoor farms, creating a profitable, scalable urban farming model.
+                    We transform unused rooftop technical rooms in condominiums into indoor hydroponic and aeroponic farms, providing residents with fresh, pesticide-free greens and creating a profitable, scalable urban farming model.
                 </p>
-                <p data-key="rooftopFarmingIntro" class="text-center max-w-4xl mx-auto text-slate-300 -mt-8 mb-12"></p>
-                
                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <!-- Text Content -->
                     <div class="text-content">
@@ -267,33 +231,13 @@
                         </div>
                     </div>
                      <!-- Video Showcase -->
-                    <div class="grid grid-cols-2 gap-4">
-                         <div class="rounded-lg shadow-lg overflow-hidden">
-                            <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                                <source src="Arc_shot_20251014.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        <div class="rounded-lg shadow-lg overflow-hidden">
-                            <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                                <source src="video_2025-10-14_13-09-39.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
+                    <div class="rounded-lg shadow-lg overflow-hidden">
+                        <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                            <source src="Arc_shot_20251014.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
-
-                <!-- Custom Plans Sub-section -->
-                <div class="mt-20">
-                    <h3 data-key="rooftopCustomTitle" class="text-3xl font-bold text-white mb-4 text-center">Tailored for Every Community</h3>
-                    <p data-key="rooftopCustomText" class="section-subtitle"></p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                        <img src="photo_2025-10-14_13-09-52.jpg" alt="Custom farm layout design" class="rounded-lg shadow-lg w-full h-64 object-cover transform hover:scale-105 transition-transform duration-300">
-                        <img src="photo_2025-10-14_13-09-50.jpg" alt="Spacious farm interior" class="rounded-lg shadow-lg w-full h-64 object-cover transform hover:scale-105 transition-transform duration-300">
-                        <img src="photo_2025-10-14_13-09-46.jpg" alt="Technical drawing of a farm layout" class="rounded-lg shadow-lg w-full h-64 object-cover transform hover:scale-105 transition-transform duration-300">
-                    </div>
-                </div>
-
             </div>
         </section>
         
@@ -313,12 +257,9 @@
 
     <!-- Footer -->
     <footer class="bg-slate-900 border-t border-slate-800 py-6">
-        <div class="container mx-auto px-6 flex flex-col sm:flex-row justify-center items-center text-center text-slate-500 gap-4">
-            <img src="Elio_Genesis.jpg" alt="Elio Genesis Corporation Logo" class="h-12">
-            <div>
-                 <p data-key="footerRights">&copy; 2025 Elio Genesis Corporation. All Rights Reserved.</p>
-                 <p data-key="footerSlogan" class="text-sm mt-1">Pioneering Green Technology for Urban Environments.</p>
-            </div>
+        <div class="container mx-auto px-6 text-center text-slate-500">
+            <p data-key="footerRights">&copy; 2025 Elio Genesis Corporation. All Rights Reserved.</p>
+            <p data-key="footerSlogan" class="text-sm mt-1">Pioneering Green Technology for Urban Environments.</p>
         </div>
     </footer>
 
@@ -330,7 +271,6 @@
                 navSmartHubsMobile: "Smart Hubs", navBioTechMobile: "Bio-Tech Solutions", navRooftopFarmingMobile: "Rooftop Farming", navContactMobile: "Contact",
                 heroTitle: "The Future is Calling",
                 heroSubtitle: "Repurposing Italy's infrastructure into a network of smart, sustainable urban nodes.",
-                partnersTitle: "Our Success is Built on a Foundation of Diverse Expertise",
                 transformationTitle: "Proposition 1: The Smart Urban Hub",
                 transformationSubtitle: "We propose the 'Cabina del Futuro,' a complete overhaul of the phone booth's functionality. Each unit will become a self-sufficient, solar-powered smart node equipped with a range of essential modern services.",
                 greenSolutionsTitle: "Proposition 2: Bio-Tech Air Solutions",
@@ -357,31 +297,27 @@
                     { title: "Device Charging Station", desc: "USB-A and USB-C ports for charging personal devices." },
                     { title: "Public Access Defibrillator (AED)", desc: "An accessible AED for use in cardiac emergencies." },
                     { title: "First-Aid Kit", desc: "A stocked first-aid box for minor injuries." },
-                    { title: "Taxi Call Button", desc: "Instantly call for a taxi with a single press." },
                     { title: "IoT Environmental Sensors", desc: "Collect real-time data on air quality, noise, and temperature." },
                     { title: "Interactive City Kiosk", desc: "Touchscreens for maps, transport, and local events." },
-                    { title: "Emergency Call Point", desc: "A one-touch button to connect with emergency services." }
+                    { title: "Emergency Call Point", desc: "A one-touch button to connect with emergency services." },
+                    { title: "Small Object Locker", desc: "Secure, short-term storage for small items." }
                 ],
                 touristHubFeatures: ["Multi-language Information Kiosk", "Public Wi-Fi & Device Charging", "Ticket Vending for attractions/transport", "Secure Lockers"],
                 communityHubFeatures: ["Digital Community Noticeboard", "Air Quality & Noise Sensors", "Tool/Book Sharing Library Access", "Emergency Call Point", "Public Access Defibrillator (AED)", "First-Aid Kit"],
                 rooftopFarmingTitle: "Proposition 3: Rooftop Farming",
-                rooftopFarmingSubtitle: "We transform unused rooftop technical rooms into indoor farms, creating a profitable, scalable urban farming model.",
-                rooftopFarmingIntro: "Our model builds upon the growing success of urban agriculture in Italy. With pioneering microgreen projects like Agricooltur® and Vertical Farm Italia already thriving in Milan, and with innovative agricultural techniques increasingly recognized since 2021, the time is right for expansion. This concept also aligns perfectly with Italy's increasing trend of adaptive reuse, seen in projects like the Mercato Centrale and Fondazione Prada, which turn underutilized spaces into vibrant community assets.",
+                rooftopFarmingSubtitle: "We transform unused rooftop technical rooms in condominiums into indoor hydroponic and aeroponic farms, providing residents with fresh, pesticide-free greens and creating a profitable, scalable urban farming model.",
                 rooftopHowItWorksTitle: "How It Works",
                 rooftopHowItWorksText: "Room size: ~12 m², fully sealed with climate control and LED grow lights. Equipment: 3 multi-level racks, vertical gardens, automated irrigation & sensors, 24/7 video monitoring. Production: harvest is shared between residents and the company. Participation: residents can choose their crops and follow growth through a mobile app.",
                 rooftopBenefitsTitle: "Benefits",
                 rooftopBenefits: ["Fresh local greens grown inside the building.", "Lower CO₂ and zero transport waste.", "Additional income & reduced costs for residents.", "Educational value for families and children.", "Scalable model for condominiums, schools & offices."],
                 rooftopPartnershipTitle: "Partnership",
-                rooftopPartnershipText: "We manage installation, maintenance, and monitoring. The condominium receives a share of the harvest and contributes space only.",
-                rooftopCustomTitle: "Tailored for Every Community",
-                rooftopCustomText: "We understand that every building is unique. That's why we design custom layouts for each space, taking into account the specific interests of the residents and local market opportunities to maximize both yield and community engagement."
+                rooftopPartnershipText: "We manage installation, maintenance, and monitoring. The condominium receives a share of the harvest and contributes space only."
             },
             it: {
                 navSmartHubs: "Hub Intelligenti", navBioTech: "Soluzioni Bio-Tech", navRooftopFarming: "Coltivazione su Tetto", navContact: "Contatti",
                 navSmartHubsMobile: "Hub Intelligenti", navBioTechMobile: "Soluzioni Bio-Tech", navRooftopFarmingMobile: "Coltivazione su Tetto", navContactMobile: "Contatti",
                 heroTitle: "Il Futuro Chiama",
                 heroSubtitle: "Riconvertire l'infrastruttura italiana in una rete di nodi urbani intelligenti e sostenibili.",
-                partnersTitle: "Il Nostro Successo si Basa su una Fondazione di Diverse Competenze",
                 transformationTitle: "Proposta 1: L'Hub Urbano Intelligente",
                 transformationSubtitle: "Proponiamo la 'Cabina del Futuro', una revisione completa della funzionalità della cabina telefonica. Ogni unità diventerà un nodo intelligente autosufficiente, alimentato a energia solare e dotato di una serie di servizi moderni essenziali.",
                 greenSolutionsTitle: "Proposta 2: Soluzioni Bio-Tecnologiche per l'Aria",
@@ -408,31 +344,27 @@
                     { title: "Stazione di Ricarica Dispositivi", desc: "Porte USB-A e USB-C per ricaricare dispositivi personali." },
                     { title: "Defibrillatore Pubblico (DAE)", desc: "Un DAE accessibile per l'uso in emergenze cardiache." },
                     { title: "Kit di Pronto Soccorso", desc: "Una cassetta di primo soccorso fornita per piccole ferite." },
-                    { title: "Pulsante Chiamata Taxi", desc: "Chiama istantaneamente un taxi con un solo pulsante." },
                     { title: "Sensori Ambientali IoT", desc: "Raccogliere dati in tempo reale su qualità dell'aria, rumore e temperatura." },
                     { title: "Chiosco Cittadino Interattivo", desc: "Touchscreen per mappe, trasporti ed eventi locali." },
-                    { title: "Punto di Chiamata d'Emergenza", desc: "Un pulsante one-touch per connettersi con i servizi di emergenza." }
+                    { title: "Punto di Chiamata d'Emergenza", desc: "Un pulsante one-touch per connettersi con i servizi di emergenza." },
+                    { title: "Armadietto per Piccoli Oggetti", desc: "Deposito sicuro a breve termine per piccoli oggetti." }
                 ],
                 touristHubFeatures: ["Chiosco informativo multilingue", "Wi-Fi pubblico e ricarica dispositivi", "Vendita biglietti per attrazioni/trasporti", "Armadietti sicuri"],
                 communityHubFeatures: ["Bacheca digitale di comunità", "Sensori di qualità dell'aria e rumore", "Accesso a libreria condivisa di attrezzi/libri", "Punto di chiamata d'emergenza", "Defibrillatore Pubblico (DAE)", "Kit di Pronto Soccorso"],
                 rooftopFarmingTitle: "Proposta 3: Coltivazione su Tetto",
-                rooftopFarmingSubtitle: "Trasformiamo locali tecnici inutilizzati sui tetti in fattorie indoor, creando un modello di agricoltura urbana redditizio e scalabile.",
-                rooftopFarmingIntro: "Il nostro modello si basa sul crescente successo dell'agricoltura urbana in Italia. Con progetti pionieristici di micro-ortaggi come Agricooltur® e Vertical Farm Italia che già prosperano a Milano e con tecniche agricole innovative sempre più riconosciute dal 2021, è il momento giusto per l'espansione. Questo concetto si allinea perfettamente anche con la crescente tendenza italiana al riuso adattivo, visibile in progetti come il Mercato Centrale e la Fondazione Prada, che trasformano spazi sottoutilizzati in vivaci beni per la comunità.",
+                rooftopFarmingSubtitle: "Trasformiamo locali tecnici inutilizzati sui tetti dei condomini in fattorie idroponiche e aeroponiche indoor, fornendo ai residenti verdure fresche e senza pesticidi e creando un modello di agricoltura urbana redditizio e scalabile.",
                 rooftopHowItWorksTitle: "Come Funziona",
                 rooftopHowItWorksText: "Dimensioni stanza: ~12 m², completamente sigillata con controllo climatico e luci di crescita a LED. Attrezzatura: 3 scaffali a più livelli, giardini verticali, irrigazione e sensori automatizzati, monitoraggio video 24/7. Produzione: il raccolto è condiviso tra i residenti e l'azienda. Partecipazione: i residenti possono scegliere le loro colture e seguirne la crescita tramite un'app mobile.",
                 rooftopBenefitsTitle: "Benefici",
                 rooftopBenefits: ["Verdure fresche locali coltivate all'interno dell'edificio.", "Minori emissioni di CO₂ e zero sprechi di trasporto.", "Reddito aggiuntivo e costi ridotti per i residenti.", "Valore educativo per famiglie e bambini.", "Modello scalabile per condomini, scuole e uffici."],
                 rooftopPartnershipTitle: "Partnership",
-                rooftopPartnershipText: "Gestiamo installazione, manutenzione e monitoraggio. Il condominio riceve una parte del raccolto e contribuisce solo con lo spazio.",
-                rooftopCustomTitle: "Su Misura per Ogni Comunità",
-                rooftopCustomText: "Comprendiamo che ogni edificio è unico. Per questo motivo, progettiamo layout personalizzati per ogni spazio, tenendo conto degli interessi specifici dei residenti e delle opportunità del mercato locale per massimizzare sia la resa che il coinvolgimento della comunità."
+                rooftopPartnershipText: "Gestiamo installazione, manutenzione e monitoraggio. Il condominio riceve una parte del raccolto e contribuisce solo con lo spazio."
             },
             ru: {
                 navSmartHubs: "Смарт-Хабы", navBioTech: "Био-Тех Решения", navRooftopFarming: "Фермы на крыше", navContact: "Контакты",
                 navSmartHubsMobile: "Смарт-Хабы", navBioTechMobile: "Био-Тех Решения", navRooftopFarmingMobile: "Фермы на крыше", navContactMobile: "Контакты",
                 heroTitle: "Будущее зовет",
                 heroSubtitle: "Перепрофилирование инфраструктуры Италии в сеть умных, устойчивых городских узлов.",
-                partnersTitle: "Наш Успех Основан на Разнообразном Опыте",
                 transformationTitle: "Предложение 1: Умный городской узел",
                 transformationSubtitle: "Мы предлагаем 'Кабину будущего' — полное обновление функциональности телефонной будки. Каждое устройство станет самодостаточным, работающим на солнечной энергии умным узлом, оснащенным рядом необходимых современных услуг.",
                 greenSolutionsTitle: "Предложение 2: Био-Технологические Решения для Воздуха",
@@ -459,24 +391,21 @@
                     { title: "Станция зарядки устройств", desc: "Порты USB-A и USB-C для зарядки личных устройств." },
                     { title: "Дефибриллятор (АНД)", desc: "Доступный АНД для использования при сердечных приступах." },
                     { title: "Аптечка первой помощи", desc: "Укомплектованная аптечка для оказания первой помощи." },
-                    { title: "Кнопка вызова такси", desc: "Мгновенный вызов такси одним нажатием." },
                     { title: "Датчики среды IoT", desc: "Сбор данных в реальном времени о качестве воздуха, шуме и температуре." },
                     { title: "Интерактивный городской киоск", desc: "Сенсорные экраны для карт, транспорта и местных событий." },
-                    { title: "Пункт экстренного вызова", desc: "Кнопка для связи со службами экстренной помощи." }
+                    { title: "Пункт экстренного вызова", desc: "Кнопка для связи со службами экстренной помощи." },
+                    { title: "Ячейка для мелких предметов", desc: "Безопасное краткосрочное хранение мелких предметов." }
                 ],
                 touristHubFeatures: ["Многоязычный информационный киоск", "Общественный Wi-Fi и зарядка устройств", "Продажа билетов на аттракционы/транспорт", "Безопасные ячейки"],
                 communityHubFeatures: ["Цифровая доска объявлений", "Датчики качества воздуха и шума", "Доступ к библиотеке обмена инструментами/книгами", "Пункт экстренного вызова", "Общедоступный дефибриллятор (АНД)", "Аптечка первой помощи"],
                 rooftopFarmingTitle: "Предложение 3: Фермерство на крыше",
-                rooftopFarmingSubtitle: "Мы преобразуем неиспользуемые технические помещения на крышах в крытые фермы, создавая прибыльную и масштабируемую модель городского фермерства.",
-                rooftopFarmingIntro: "Наша модель основана на растущем успехе городского сельского хозяйства в Италии. Учитывая, что в Милане уже процветают новаторские проекты по выращиванию микрозелени, такие как Agricooltur® и Vertical Farm Italia, а с 2021 года все больше признаются инновационные сельскохозяйственные технологии, настало время для расширения. Эта концепция также идеально согласуется с растущей в Италии тенденцией адаптивного повторного использования, что видно на примере таких проектов, как Mercato Centrale и Fondazione Prada, которые превращают недостаточно используемые пространства в яркие общественные достояния.",
+                rooftopFarmingSubtitle: "Мы преобразуем неиспользуемые технические помещения на крышах кондоминиумов в закрытые гидропонные и аэропонные фермы, обеспечивая жителей свежей зеленью без пестицидов и создавая прибыльную, масштабируемую модель городского фермерства.",
                 rooftopHowItWorksTitle: "Как это работает",
                 rooftopHowItWorksText: "Размер помещения: ~12 м², полностью герметичное с климат-контролем и светодиодными лампами для роста. Оборудование: 3 многоуровневых стеллажа, вертикальные сады, автоматизированный полив и датчики, круглосуточное видеонаблюдение. Производство: урожай делится между жителями и компанией. Участие: жители могут выбирать культуры и следить за их ростом через мобильное приложение.",
                 rooftopBenefitsTitle: "Преимущества",
                 rooftopBenefits: ["Свежая местная зелень, выращенная внутри здания.", "Снижение выбросов CO₂ и отсутствие транспортных отходов.", "Дополнительный доход и снижение затрат для жителей.", "Образовательная ценность для семей и детей.", "Масштабируемая модель для кондоминиумов, школ и офисов."],
                 rooftopPartnershipTitle: "Партнерство",
-                rooftopPartnershipText: "Мы управляем установкой, обслуживанием и мониторингом. Кондоминиум получает долю урожая и предоставляет только помещение.",
-                rooftopCustomTitle: "Индивидуально для каждого сообщества",
-                rooftopCustomText: "Мы понимаем, что каждое здание уникально. Поэтому мы разрабатываем индивидуальные планировки для каждого пространства, учитывая конкретные интересы жителей и возможности местного рынка, чтобы максимизировать как урожайность, так и вовлеченность сообщества."
+                rooftopPartnershipText: "Мы управляем установкой, обслуживанием и мониторингом. Кондоминиум получает долю урожая и предоставляет только помещение."
             }
         };
 
@@ -486,7 +415,7 @@
             "IoT Environmental Sensors": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M4 18h16"/><path d="M12 12c-3.33 0-5.4-1.31-6-3.08.17-.5.34-.99.5-1.42.17-.43.34-.84.5-1.22.2-.42.4-.78.5-1.06.33-.83 1.25-1.22 2-1.22s1.67.39 2 1.22c.1.28.3.64.5 1.06.16.38.33.79.5 1.22.16.43.33.92.5 1.42C17.4 10.69 15.33 12 12 12z"/></svg>`,
             "Interactive City Kiosk": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>`,
             "Emergency Call Point": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
-            "Taxi Call Button": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M21 17H3v-2a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2z"/><circle cx="6.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/><path d="M5 13l-1-4h16l-1 4H5z"/></svg>`,
+            "Small Object Locker": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8.5 8.5v.01"/><path d="M15.5 8.5v.01"/><path d="M15.5 15.5v.01"/><path d="M8.5 15.5v.01"/><path d="M12 3v18"/></svg>`,
             "Public Access Defibrillator (AED)": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/><path d="M12 11l-2 4h4l-2 4"/></svg>`,
             "First-Aid Kit": `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-400"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M8 11h8"/><path d="M12 7v8"/></svg>`
         };
@@ -514,7 +443,7 @@
         }
 
         function updateDynamicContent(lang) {
-            const transformationGrid = document.getElementById('smart-hub-features-grid');
+            const transformationGrid = document.querySelector('#smart-hubs .grid');
             transformationGrid.innerHTML = '';
             translations.en.transformationFeatures.forEach((feature, index) => {
                 const translatedFeature = translations[lang].transformationFeatures[index];
