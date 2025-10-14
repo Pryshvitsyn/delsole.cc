@@ -16,10 +16,10 @@
             color: #e2e8f0; /* Tailwind slate-200 */
         }
         .section-title {
-            @apply text-4xl font-bold text-white mb-12 text-center;
+            @apply text-4xl font-bold text-white mb-6 text-center;
         }
         .section-subtitle {
-            @apply text-lg text-slate-200 mb-12 text-center max-w-3xl mx-auto;
+            @apply text-lg text-slate-200 mb-20 text-center max-w-3xl mx-auto;
         }
         #video-hero {
             position: relative;
@@ -91,14 +91,16 @@
     <!-- Header & Navigation -->
     <header class="bg-slate-900/70 backdrop-blur-xl border-b border-slate-700/50 shadow-sm sticky top-0 z-40">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#">
-                <img src="Elio_Genesis.jpg" alt="Elio Genesis Corporation Logo" class="h-10 bg-white rounded-md p-1">
-            </a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#smart-hubs" data-key="navSmartHubs" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Smart Hubs</a>
-                <a href="#bio-tech" data-key="navBioTech" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Bio-Tech Solutions</a>
-                <a href="#rooftop-farming" data-key="navRooftopFarming" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Rooftop Farming</a>
-                <a href="#contact" data-key="navContact" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Contact</a>
+            <div class="flex items-center space-x-8">
+                <a href="#">
+                    <img src="Elio_Genesis.jpg" alt="Elio Genesis Corporation Logo" class="h-10">
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#smart-hubs" data-key="navSmartHubs" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Smart Hubs</a>
+                    <a href="#bio-tech" data-key="navBioTech" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Bio-Tech Solutions</a>
+                    <a href="#rooftop-farming" data-key="navRooftopFarming" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Rooftop Farming</a>
+                    <a href="#contact" data-key="navContact" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Contact</a>
+                </div>
             </div>
             <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-slate-300 hover:text-cyan-400 hover:bg-slate-800 focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 a 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -157,23 +159,25 @@
                     <img src="EMI.jpg" alt="EMI Logo" class="h-12 logo-grayscale">
                     <img src="green_chief.jpg" alt="Green Chief Logo" class="h-12 logo-grayscale">
                     <img src="greencity.jpg" alt="Greencity Solutions Logo" class="h-10 logo-grayscale">
-                    <img src="sos_soluzione.jpg" alt="SOS Soluzione Logo" class="h-16 logo-grayscale">
+                    <img src="sos_soluzione.jpg" alt="SOS Soluzione Logo" class="h-12 logo-grayscale">
                     <img src="TGSimon.jpg" alt="TG Simon Logo" class="h-8 logo-grayscale">
                 </div>
             </div>
         </section>
 
         <!-- Full-width Video Section -->
-        <section class="w-full h-[75vh] bg-black">
-             <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                <source src="green_transformation.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <section class="w-full h-[75vh] bg-black flex justify-center items-center p-8">
+             <div class="h-full w-full max-w-7xl">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                    <source src="green_transformation.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+             </div>
         </section>
 
 
         <!-- The Smart Hubs Section -->
-        <section id="smart-hubs" class="py-40 bg-slate-900/50 fade-in-section">
+        <section id="smart-hubs" class="py-48 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6">
                  <h2 data-key="transformationTitle" class="section-title text-white">Proposition 1: The Smart Urban Hub</h2>
                  <p data-key="transformationSubtitle" class="section-subtitle">
@@ -214,7 +218,7 @@
         </section>
 
         <!-- Bio-Tech Solutions Section -->
-        <section id="bio-tech" class="py-40 bg-slate-900 fade-in-section">
+        <section id="bio-tech" class="py-48 bg-slate-900 fade-in-section">
             <div class="container mx-auto px-6">
                 <h2 data-key="greenSolutionsTitle" class="section-title text-white">Proposition 2: Bio-Tech Air Solutions</h2>
                 <p data-key="greenSolutionsSubtitle" class="section-subtitle">
@@ -240,7 +244,7 @@
         </section>
 
         <!-- Rooftop Farming Section -->
-        <section id="rooftop-farming" class="py-40 bg-slate-900/50 fade-in-section">
+        <section id="rooftop-farming" class="py-48 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6">
                 <h2 data-key="rooftopFarmingTitle" class="section-title text-white">Proposition 3: Rooftop Farming</h2>
                 <p data-key="rooftopFarmingSubtitle" class="section-subtitle">
@@ -306,7 +310,7 @@
                  <p data-key="contactSubtitle" class="text-lg max-w-3xl mx-auto mb-8 text-slate-300">
                     We believe this project can redefine public spaces across Italy. If you are interested in partnering with us, learning more about the technology, or discussing a pilot program, we would love to hear from you.
                 </p>
-                <a href="mailto:contact@eliogenesis.corp" data-key="contactButton" class="bg-cyan-500 text-slate-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-cyan-400 transition-all duration-300 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-400/40 transform hover:scale-105">
+                <a href="mailto:andrii.pryshvitsyn@pec.it" data-key="contactButton" class="bg-cyan-500 text-slate-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-cyan-400 transition-all duration-300 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-400/40 transform hover:scale-105">
                     Get in Touch
                 </a>
             </div>
@@ -316,7 +320,7 @@
     <!-- Footer -->
     <footer class="bg-slate-900 border-t border-slate-800 py-6">
         <div class="container mx-auto px-6 flex flex-col sm:flex-row justify-center items-center text-center text-slate-500 gap-4">
-            <img src="Elio_Genesis.jpg" alt="Elio Genesis Corporation Logo" class="h-12 bg-white rounded-md p-1">
+            <img src="Elio_Genesis.jpg" alt="Elio Genesis Corporation Logo" class="h-10">
             <div>
                  <p data-key="footerRights">&copy; 2025 Elio Genesis Corporation. All Rights Reserved.</p>
                  <p data-key="footerSlogan" class="text-sm mt-1">Pioneering Green Technology for Urban Environments.</p>
