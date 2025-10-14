@@ -12,8 +12,10 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* Tailwind slate-900 */
-            color: #e2e8f0; /* Tailwind slate-200 */
+            background-color: #0f172a;
+            /* Tailwind slate-900 */
+            color: #e2e8f0;
+            /* Tailwind slate-200 */
         }
         .section-title {
             @apply text-4xl font-bold text-white mb-8 text-center;
@@ -55,14 +57,18 @@
         }
         /* Glassmorphism card style */
         .glass-card {
-            background: rgba(30, 41, 59, 0.5); /* slate-800 with opacity */
+            background: rgba(30, 41, 59, 0.5);
+            /* slate-800 with opacity */
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(51, 65, 85, 0.5); /* slate-700 with opacity */
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            /* slate-700 with opacity */
             transition: all 0.3s ease;
         }
         .glass-card:hover {
-            background: rgba(51, 65, 85, 0.6); /* slate-700 with opacity */
-            border-color: rgba(34, 211, 238, 0.4); /* cyan-400 with opacity */
+            background: rgba(51, 65, 85, 0.6);
+            /* slate-700 with opacity */
+            border-color: rgba(34, 211, 238, 0.4);
+            /* cyan-400 with opacity */
             transform: translateY(-8px);
             box-shadow: 0 0 25px rgba(34, 211, 238, 0.1);
         }
@@ -90,26 +96,35 @@
 
     <!-- Header & Navigation -->
     <header class="bg-slate-900/70 backdrop-blur-xl border-b border-slate-700/50 shadow-sm sticky top-0 z-40">
-        <nav class="container mx-auto px-6 py-4 flex items-center">
-            <a href="#" class="mr-8">
-                <img src="Elio_Genesis.png" alt="Elio Genesis Corporation Logo" class="h-10">
-            </a>
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <!-- Left: Proposal -->
+            <div class="flex-1 flex justify-start">
+                <a href="#" title="Elio Genesis Corporation">
+                    <span class="text-2xl font-bold text-white tracking-wider">PROPOSAL</span>
+                </a>
+            </div>
+
+            <!-- Center: Desktop Menu -->
             <div class="hidden md:flex space-x-8">
                 <a href="#smart-hubs" data-key="navSmartHubs" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Smart Hubs</a>
                 <a href="#bio-tech" data-key="navBioTech" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Bio-Tech Solutions</a>
                 <a href="#rooftop-farming" data-key="navRooftopFarming" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Rooftop Farming</a>
                 <a href="#contact" data-key="navContact" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300">Contact</a>
             </div>
-            <button id="mobile-menu-button" class="md:hidden ml-auto p-2 rounded-md text-slate-300 hover:text-cyan-400 hover:bg-slate-800 focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
+
+            <!-- Right: Mobile Button and placeholder -->
+            <div class="flex-1 flex justify-end">
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-slate-300 hover:text-cyan-400 hover:bg-slate-800 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
         </nav>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="#smart-hubs" data-key="navSmartHubsMobile" class="block py-2 text-slate-300 hover:text-cyan-400">Smart Hubs</a>
-            <a href="#bio-tech" data-key="navBioTechMobile" class="block py-2 text-slate-300 hover:text-cyan-400">Bio-Tech Solutions</a>
-            <a href="#rooftop-farming" data-key="navRooftopFarmingMobile" class="block py-2 text-slate-300 hover:text-cyan-400">Rooftop Farming</a>
-            <a href="#contact" data-key="navContactMobile" class="block py-2 text-slate-300 hover:text-cyan-400">Contact</a>
+            <a href="#smart-hubs" data-key="navSmartHubsMobile" class="block py-2 text-slate-300 hover:text-cyan-400 text-center">Smart Hubs</a>
+            <a href="#bio-tech" data-key="navBioTechMobile" class="block py-2 text-slate-300 hover:text-cyan-400 text-center">Bio-Tech Solutions</a>
+            <a href="#rooftop-farming" data-key="navRooftopFarmingMobile" class="block py-2 text-slate-300 hover:text-cyan-400 text-center">Rooftop Farming</a>
+            <a href="#contact" data-key="navContactMobile" class="block py-2 text-slate-300 hover:text-cyan-400 text-center">Contact</a>
         </div>
     </header>
 
@@ -127,7 +142,7 @@
                 <a href="#" class="flex items-center px-4 py-2 text-slate-300 hover:bg-slate-700" onclick="changeLanguage('ru')"><span class="mr-3">🇷🇺</span> Русский</a>
             </div>
         </div>
-         <!-- WhatsApp Button -->
+        <!-- WhatsApp Button -->
         <a href="https://wa.me/393519363404" target="_blank" class="bg-green-500 text-white rounded-full p-3 shadow-lg hover:bg-green-600 transition-transform hover:scale-110">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 4.315 1.731 6.086l.06.097-1.14 4.155 4.274-1.118.106.063z"/></svg>
         </a>
@@ -142,7 +157,7 @@
             </video>
             <div class="video-overlay"></div>
             <div class="hero-content h-full flex items-center justify-center text-white text-center">
-                 <div class="container mx-auto px-6">
+                <div class="container mx-auto px-6">
                     <h1 data-key="heroTitle" class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-pulse bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">The Future is Calling</h1>
                     <p data-key="heroSubtitle" class="text-xl md:text-2xl font-light max-w-3xl mx-auto text-slate-300">Repurposing Italy's infrastructure into a network of smart, sustainable urban nodes.</p>
                 </div>
@@ -165,47 +180,47 @@
 
         <!-- Full-width Video Section -->
         <section class="w-full bg-black flex justify-center items-center py-16 px-8">
-             <div class="h-[65vh] w-full max-w-6xl">
+            <div class="h-[65vh] w-full max-w-6xl">
                 <video autoplay loop muted playsinline class="w-full h-full object-contain">
                     <source src="green_transformation.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-             </div>
+            </div>
         </section>
 
 
         <!-- The Smart Hubs Section -->
         <section id="smart-hubs" class="py-48 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6">
-                 <h2 data-key="transformationTitle" class="section-title text-white">Proposition 1: The Smart Urban Hub</h2>
-                 <p data-key="transformationSubtitle" class="section-subtitle">
+                <h2 data-key="transformationTitle" class="section-title text-white">Proposition 1: The Smart Urban Hub</h2>
+                <p data-key="transformationSubtitle" class="section-subtitle">
                     We propose the "Cabina del Futuro," a complete overhaul of the phone booth's functionality. Each unit will become a self-sufficient, solar-powered smart node equipped with a range of essential modern services.
-                 </p>
+                </p>
 
                 <div class="mt-16">
-                     <h3 data-key="propositionsTitle" class="text-3xl font-bold text-white mb-4 text-center">Configurations for Every Need</h3>
+                    <h3 data-key="propositionsTitle" class="text-3xl font-bold text-white mb-4 text-center">Configurations for Every Need</h3>
                     <p data-key="propositionsSubtitle" class="section-subtitle">
                         The Smart Urban Hub is not a one-size-fits-all solution. We propose several models that can be deployed based on the specific needs of a location.
                     </p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                         <div class="glass-card rounded-lg p-8">
+                        <div class="glass-card rounded-lg p-8">
                             <h3 data-key="touristHubTitle" class="text-2xl font-bold mb-4 text-cyan-400">The Tourist Hub</h3>
                             <p data-key="touristHubDesc" class="mb-4 text-slate-300">Located in high-traffic tourist areas like Piazza Navona or near the Colosseum. It prioritizes services for visitors.</p>
                             <ul data-key="touristHubFeatures" class="space-y-2 text-slate-400">
                                 <!-- Populated by JS -->
                             </ul>
                         </div>
-                         <div class="glass-card rounded-lg p-8">
+                        <div class="glass-card rounded-lg p-8">
                             <h3 data-key="communityHubTitle" class="text-2xl font-bold mb-4 text-green-400">The Community Hub</h3>
                             <p data-key="communityHubDesc" class="mb-4 text-slate-300">Designed for residential areas and local squares. It focuses on services for the local community.</p>
                             <ul data-key="communityHubFeatures" class="space-y-2 text-slate-400">
-                               <!-- Populated by JS -->
+                                <!-- Populated by JS -->
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                 <div class="mt-20">
+                <div class="mt-20">
                     <h3 data-key="standardFeaturesTitle" class="text-3xl font-bold text-white mb-12 text-center">Standard Features in Every Hub</h3>
                     <div id="smart-hub-features-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                         <!-- Cards will be populated by JS -->
@@ -234,7 +249,7 @@
                     <div class="text-content">
                         <p data-key="greenSolutionsText" class="mb-6 text-slate-300"></p>
                         <ul id="green-benefits-list" class="space-y-6">
-                           <!-- JS will populate this -->
+                            <!-- JS will populate this -->
                         </ul>
                     </div>
                 </div>
@@ -250,7 +265,7 @@
                 </p>
                 <p data-key="rooftopFarmingIntro" class="text-center max-w-4xl mx-auto text-slate-300 mb-12"></p>
                 
-                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <!-- Text Content -->
                     <div class="text-content">
                         <div class="space-y-8">
@@ -258,21 +273,21 @@
                                 <h3 data-key="rooftopHowItWorksTitle" class="text-2xl font-bold mb-4 text-cyan-400">How It Works</h3>
                                 <p data-key="rooftopHowItWorksText" class="text-slate-300"></p>
                             </div>
-                             <div>
+                            <div>
                                 <h3 data-key="rooftopBenefitsTitle" class="text-2xl font-bold mb-4 text-cyan-400">Benefits</h3>
                                 <ul id="rooftop-benefits-list" class="space-y-2 text-slate-400">
                                     <!-- JS will populate this -->
                                 </ul>
                             </div>
-                             <div>
+                            <div>
                                 <h3 data-key="rooftopPartnershipTitle" class="text-2xl font-bold mb-4 text-cyan-400">Partnership</h3>
                                 <p data-key="rooftopPartnershipText" class="text-slate-300"></p>
                             </div>
                         </div>
                     </div>
-                     <!-- Video Showcase -->
+                    <!-- Video Showcase -->
                     <div class="grid grid-cols-2 gap-4">
-                         <div class="rounded-lg shadow-lg overflow-hidden">
+                        <div class="rounded-lg shadow-lg overflow-hidden">
                             <video autoplay loop muted playsinline class="w-full h-full object-cover">
                                 <source src="Arc_shot_20251014.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
@@ -304,8 +319,8 @@
         <!-- Contact Section -->
         <section id="contact" class="py-20 bg-gradient-to-r from-blue-900 via-slate-900 to-slate-900 fade-in-section">
             <div class="container mx-auto px-6 text-center">
-                 <h2 data-key="contactTitle" class="text-4xl font-bold text-white mb-4">Let's Build the Future Together</h2>
-                 <p data-key="contactSubtitle" class="text-lg max-w-3xl mx-auto mb-8 text-slate-300">
+                <h2 data-key="contactTitle" class="text-4xl font-bold text-white mb-4">Let's Build the Future Together</h2>
+                <p data-key="contactSubtitle" class="text-lg max-w-3xl mx-auto mb-8 text-slate-300">
                     We believe this project can redefine public spaces across Italy. If you are interested in partnering with us, learning more about the technology, or discussing a pilot program, we would love to hear from you.
                 </p>
                 <a href="mailto:andrii.pryshvitsyn@pec.it" data-key="contactButton" class="bg-cyan-500 text-slate-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-cyan-400 transition-all duration-300 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-400/40 transform hover:scale-105">
@@ -318,8 +333,8 @@
     <!-- Footer -->
     <footer class="bg-slate-900 border-t border-slate-800 py-6">
         <div class="container mx-auto px-6 text-center text-slate-500">
-             <p data-key="footerRights">&copy; 2025 Elio Genesis Corporation. All Rights Reserved.</p>
-             <p data-key="footerSlogan" class="text-sm mt-1">Pioneering Green Technology for Urban Environments.</p>
+            <p data-key="footerRights">&copy; 2025 Elio Genesis Corporation. All Rights Reserved.</p>
+            <p data-key="footerSlogan" class="text-sm mt-1">Pioneering Green Technology for Urban Environments.</p>
         </div>
     </footer>
 
@@ -327,8 +342,14 @@
         // --- TRANSLATION DATA ---
         const translations = {
             en: {
-                navSmartHubs: "Smart Hubs", navBioTech: "Bio-Tech Solutions", navRooftopFarming: "Rooftop Farming", navContact: "Contact",
-                navSmartHubsMobile: "Smart Hubs", navBioTechMobile: "Bio-Tech Solutions", navRooftopFarmingMobile: "Rooftop Farming", navContactMobile: "Contact",
+                navSmartHubs: "Smart Hubs",
+                navBioTech: "Bio-Tech Solutions",
+                navRooftopFarming: "Rooftop Farming",
+                navContact: "Contact",
+                navSmartHubsMobile: "Smart Hubs",
+                navBioTechMobile: "Bio-Tech Solutions",
+                navRooftopFarmingMobile: "Rooftop Farming",
+                navContactMobile: "Contact",
                 heroTitle: "The Future is Calling",
                 heroSubtitle: "Repurposing Italy's infrastructure into a network of smart, sustainable urban nodes.",
                 partnersTitle: "Our Success is Built on a Foundation of Diverse Expertise",
@@ -337,11 +358,16 @@
                 greenSolutionsTitle: "Proposition 2: Bio-Tech Air Solutions",
                 greenSolutionsSubtitle: "We propose integrating proven green technologies like moss-based bio-filters into urban furniture and advertising stands to actively combat air pollution and urban heat.",
                 greenSolutionsText: "This technology offers a powerful, nature-based solution to combat the effects of global warming in cities by addressing critical challenges like air pollution and excessive heat. By integrating living moss with smart technology, this system delivers key benefits for urban environments and their residents:",
-                greenBenefits: [
-                    { title: "Cleaner Air & Better Health", text: "It purifies the air by removing up to 82% of harmful fine dust, a major contributor to respiratory and cardiovascular diseases. This directly creates a healthier environment for citizens. Depending on the configuration, the system can clean the air for up to 20,000 people every hour." },
-                    { title: "Natural Cooling", text: "To combat the urban 'heat island effect,' the system naturally cools the surrounding air by up to 4°C through evaporation, making public spaces more comfortable." },
-                    { title: "Effective Climate Action", text: "The biofilters actively fight climate change. A single unit can offset up to 355 kg of CO2 equivalents annually. It is also highly effective at filtering soot (black carbon), a particle that is significantly more potent than CO2 in driving global warming, making it a valuable tool for protecting cities where traditional greening isn't possible." }
-                ],
+                greenBenefits: [{
+                    title: "Cleaner Air & Better Health",
+                    text: "It purifies the air by removing up to 82% of harmful fine dust, a major contributor to respiratory and cardiovascular diseases. This directly creates a healthier environment for citizens. Depending on the configuration, the system can clean the air for up to 20,000 people every hour."
+                }, {
+                    title: "Natural Cooling",
+                    text: "To combat the urban 'heat island effect,' the system naturally cools the surrounding air by up to 4°C through evaporation, making public spaces more comfortable."
+                }, {
+                    title: "Effective Climate Action",
+                    text: "The biofilters actively fight climate change. A single unit can offset up to 355 kg of CO2 equivalents annually. It is also highly effective at filtering soot (black carbon), a particle that is significantly more potent than CO2 in driving global warming, making it a valuable tool for protecting cities where traditional greening isn't possible."
+                }],
                 propositionsTitle: "Configurations for Every Need",
                 propositionsSubtitle: "The Smart Urban Hub is not a one-size-fits-all solution. We propose several models that can be deployed based on the specific needs of a location.",
                 standardFeaturesTitle: "Standard Features in Every Hub",
@@ -354,18 +380,37 @@
                 contactButton: "Get in Touch",
                 footerRights: "&copy; 2025 Elio Genesis Corporation. All Rights Reserved.",
                 footerSlogan: "Pioneering Green Technology for Urban Environments.",
-                transformationFeatures: [
-                    { title: "Public Wi-Fi Hotspot", desc: "Free, high-speed internet access for everyone." },
-                    { title: "Device Charging Station", desc: "USB-A and USB-C ports for charging personal devices." },
-                    { title: "Public Access Defibrillator (AED)", desc: "An accessible AED for use in cardiac emergencies." },
-                    { title: "First-Aid Kit", desc: "A stocked first-aid box for minor injuries." },
-                    { title: "Taxi Call Button", desc: "Instantly call for a taxi with a single press." },
-                    { title: "IoT Environmental Sensors", desc: "Collect real-time data on air quality, noise, and temperature." },
-                    { title: "Interactive City Kiosk", desc: "Touchscreens for maps, transport, and local events." },
-                    { title: "Emergency Call Point", desc: "A one-touch button to connect with emergency services." },
-                    { title: "Integrated Air Filtration", desc: "Built-in filters actively purify the surrounding air, reducing pollutants." },
-                    { title: "Microgreen Showcase", desc: "An advertising stand showcasing the simplicity and benefits of urban farming to inspire adoption." }
-                ],
+                transformationFeatures: [{
+                    title: "Public Wi-Fi Hotspot",
+                    desc: "Free, high-speed internet access for everyone."
+                }, {
+                    title: "Device Charging Station",
+                    desc: "USB-A and USB-C ports for charging personal devices."
+                }, {
+                    title: "Public Access Defibrillator (AED)",
+                    desc: "An accessible AED for use in cardiac emergencies."
+                }, {
+                    title: "First-Aid Kit",
+                    desc: "A stocked first-aid box for minor injuries."
+                }, {
+                    title: "Taxi Call Button",
+                    desc: "Instantly call for a taxi with a single press."
+                }, {
+                    title: "IoT Environmental Sensors",
+                    desc: "Collect real-time data on air quality, noise, and temperature."
+                }, {
+                    title: "Interactive City Kiosk",
+                    desc: "Touchscreens for maps, transport, and local events."
+                }, {
+                    title: "Emergency Call Point",
+                    desc: "A one-touch button to connect with emergency services."
+                }, {
+                    title: "Integrated Air Filtration",
+                    desc: "Built-in filters actively purify the surrounding air, reducing pollutants."
+                }, {
+                    title: "Microgreen Showcase",
+                    desc: "An advertising stand showcasing the simplicity and benefits of urban farming to inspire adoption."
+                }],
                 touristHubFeatures: ["Multi-language Information Kiosk", "Public Wi-Fi & Device Charging", "Ticket Vending for attractions/transport", "Secure Lockers"],
                 communityHubFeatures: ["Digital Community Noticeboard", "Air Quality & Noise Sensors", "Tool/Book Sharing Library Access", "Emergency Call Point", "Public Access Defibrillator (AED)", "First-Aid Kit"],
                 rooftopFarmingTitle: "Proposition 3: Rooftop Farming",
@@ -381,8 +426,14 @@
                 rooftopCustomText: "We understand that every building is unique. That's why we design custom layouts for each space, taking into account the specific interests of the residents and local market opportunities to maximize both yield and community engagement."
             },
             it: {
-                navSmartHubs: "Hub Intelligenti", navBioTech: "Soluzioni Bio-Tech", navRooftopFarming: "Coltivazione su Tetto", navContact: "Contatti",
-                navSmartHubsMobile: "Hub Intelligenti", navBioTechMobile: "Soluzioni Bio-Tech", navRooftopFarmingMobile: "Coltivazione su Tetto", navContactMobile: "Contatti",
+                navSmartHubs: "Hub Intelligenti",
+                navBioTech: "Soluzioni Bio-Tech",
+                navRooftopFarming: "Coltivazione su Tetto",
+                navContact: "Contatti",
+                navSmartHubsMobile: "Hub Intelligenti",
+                navBioTechMobile: "Soluzioni Bio-Tech",
+                navRooftopFarmingMobile: "Coltivazione su Tetto",
+                navContactMobile: "Contatti",
                 heroTitle: "Il Futuro Chiama",
                 heroSubtitle: "Riconvertire l'infrastruttura italiana in una rete di nodi urbani intelligenti e sostenibili.",
                 partnersTitle: "Il Nostro Successo si Basa su una Fondazione di Diverse Competenze",
@@ -391,11 +442,16 @@
                 greenSolutionsTitle: "Proposta 2: Soluzioni Bio-Tecnologiche per l'Aria",
                 greenSolutionsSubtitle: "Proponiamo di integrare tecnologie verdi comprovate come i bio-filtri a base di muschio nell'arredo urbano e nei pannelli pubblicitari per combattere attivamente l'inquinamento atmosferico e il calore urbano.",
                 greenSolutionsText: "Questa tecnologia offre una potente soluzione basata sulla natura per contrastare gli effetti del riscaldamento globale nelle città, affrontando sfide critiche come l'inquinamento atmosferico e il calore eccessivo. Integrando muschio vivo con tecnologia intelligente, questo sistema offre vantaggi chiave per gli ambienti urbani e i loro residenti:",
-                 greenBenefits: [
-                    { title: "Aria Più Pulita e Salute Migliore", text: "Purifica l'aria rimuovendo fino all'82% delle polveri sottili nocive, uno dei principali fattori di malattie respiratorie e cardiovascolari. Questo crea direttamente un ambiente più sano per i cittadini. A seconda della configurazione, il sistema può purificare l'aria per un massimo di 20.000 persone ogni ora." },
-                    { title: "Raffreddamento Naturale", text: "Per combattere l'effetto 'isola di calore' urbano, il sistema raffredda naturalmente l'aria circostante fino a 4°C attraverso l'evaporazione, rendendo gli spazi pubblici più confortevoli." },
-                    { title: "Azione Climatica Efficace", text: "I biofiltri combattono attivamente il cambiamento climatico. Una singola unità può compensare fino a 355 kg di CO2 equivalenti all'anno. È anche molto efficace nel filtrare la fuliggine (black carbon), una particella significativamente più potente della CO2 nel guidare il riscaldamento globale, rendendola uno strumento prezioso per proteggere le città dove l'inverdimento tradizionale non è possibile." }
-                ],
+                greenBenefits: [{
+                    title: "Aria Più Pulita e Salute Migliore",
+                    text: "Purifica l'aria rimuovendo fino all'82% delle polveri sottili nocive, uno dei principali fattori di malattie respiratorie e cardiovascolari. Questo crea direttamente un ambiente più sano per i cittadini. A seconda della configurazione, il sistema può purificare l'aria per un massimo di 20.000 persone ogni ora."
+                }, {
+                    title: "Raffreddamento Naturale",
+                    text: "Per combattere l'effetto 'isola di calore' urbano, il sistema raffredda naturalmente l'aria circostante fino a 4°C attraverso l'evaporazione, rendendo gli spazi pubblici più confortevoli."
+                }, {
+                    title: "Azione Climatica Efficace",
+                    text: "I biofiltri combattono attivamente il cambiamento climatico. Una singola unità può compensare fino a 355 kg di CO2 equivalenti all'anno. È anche molto efficace nel filtrare la fuliggine (black carbon), una particella significativamente più potente della CO2 nel guidare il riscaldamento globale, rendendola uno strumento prezioso per proteggere le città dove l'inverdimento tradizionale non è possibile."
+                }],
                 propositionsTitle: "Configurazioni per Ogni Esigenza",
                 propositionsSubtitle: "L'Hub Urbano Intelligente non è una soluzione unica. Proponiamo diversi modelli che possono essere implementati in base alle esigenze specifiche di una località.",
                 standardFeaturesTitle: "Funzionalità Standard in Ogni Hub",
@@ -408,18 +464,37 @@
                 contactButton: "Contattaci",
                 footerRights: "&copy; 2025 Elio Genesis Corporation. Tutti i diritti riservati.",
                 footerSlogan: "Pionieri della tecnologia verde per ambienti urbani.",
-                transformationFeatures: [
-                    { title: "Hotspot Wi-Fi Pubblico", desc: "Accesso internet gratuito e ad alta velocità per tutti." },
-                    { title: "Stazione di Ricarica Dispositivi", desc: "Porte USB-A e USB-C per ricaricare dispositivi personali." },
-                    { title: "Defibrillatore Pubblico (DAE)", desc: "Un DAE accessibile per l'uso in emergenze cardiache." },
-                    { title: "Kit di Pronto Soccorso", desc: "Una cassetta di primo soccorso fornita per piccole ferite." },
-                    { title: "Pulsante Chiamata Taxi", desc: "Chiama istantaneamente un taxi con un solo pulsante." },
-                    { title: "Sensori Ambientali IoT", desc: "Raccogliere dati in tempo reale su qualità dell'aria, rumore e temperatura." },
-                    { title: "Chiosco Cittadino Interattivo", desc: "Touchscreen per mappe, trasporti ed eventi locali." },
-                    { title: "Punto di Chiamata d'Emergenza", desc: "Un pulsante one-touch per connettersi con i servizi di emergenza." },
-                    { title: "Filtrazione Aria Integrata", desc: "Filtri integrati purificano attivamente l'aria circostante, riducendo gli inquinanti." },
-                    { title: "Vetrina Micro-ortaggi", desc: "Uno stand pubblicitario che mostra la semplicità e i benefici dell'agricoltura urbana per ispirarne l'adozione." }
-                ],
+                transformationFeatures: [{
+                    title: "Hotspot Wi-Fi Pubblico",
+                    desc: "Accesso internet gratuito e ad alta velocità per tutti."
+                }, {
+                    title: "Stazione di Ricarica Dispositivi",
+                    desc: "Porte USB-A e USB-C per ricaricare dispositivi personali."
+                }, {
+                    title: "Defibrillatore Pubblico (DAE)",
+                    desc: "Un DAE accessibile per l'uso in emergenze cardiache."
+                }, {
+                    title: "Kit di Pronto Soccorso",
+                    desc: "Una cassetta di primo soccorso fornita per piccole ferite."
+                }, {
+                    title: "Pulsante Chiamata Taxi",
+                    desc: "Chiama istantaneamente un taxi con un solo pulsante."
+                }, {
+                    title: "Sensori Ambientali IoT",
+                    desc: "Raccogliere dati in tempo reale su qualità dell'aria, rumore e temperatura."
+                }, {
+                    title: "Chiosco Cittadino Interattivo",
+                    desc: "Touchscreen per mappe, trasporti ed eventi locali."
+                }, {
+                    title: "Punto di Chiamata d'Emergenza",
+                    desc: "Un pulsante one-touch per connettersi con i servizi di emergenza."
+                }, {
+                    title: "Filtrazione Aria Integrata",
+                    desc: "Filtri integrati purificano attivamente l'aria circostante, riducendo gli inquinanti."
+                }, {
+                    title: "Vetrina Micro-ortaggi",
+                    desc: "Uno stand pubblicitario che mostra la semplicità e i benefici dell'agricoltura urbana per ispirarne l'adozione."
+                }],
                 touristHubFeatures: ["Chiosco informativo multilingue", "Wi-Fi pubblico e ricarica dispositivi", "Vendita biglietti per attrazioni/trasporti", "Armadietti sicuri"],
                 communityHubFeatures: ["Bacheca digitale di comunità", "Sensori di qualità dell'aria e rumore", "Accesso a libreria condivisa di attrezzi/libri", "Punto di chiamata d'emergenza", "Defibrillatore Pubblico (DAE)", "Kit di Pronto Soccorso"],
                 rooftopFarmingTitle: "Proposta 3: Coltivazione su Tetto",
@@ -435,8 +510,14 @@
                 rooftopCustomText: "Comprendiamo che ogni edificio è unico. Per questo motivo, progettiamo layout personalizzati per ogni spazio, tenendo conto degli interessi specifici dei residenti e delle opportunità del mercato locale per massimizzare sia la resa che il coinvolgimento della comunità."
             },
             ru: {
-                navSmartHubs: "Смарт-Хабы", navBioTech: "Био-Тех Решения", navRooftopFarming: "Фермы на крыше", navContact: "Контакты",
-                navSmartHubsMobile: "Смарт-Хабы", navBioTechMobile: "Био-Тех Решения", navRooftopFarmingMobile: "Фермы на крыше", navContactMobile: "Контакты",
+                navSmartHubs: "Смарт-Хабы",
+                navBioTech: "Био-Тех Решения",
+                navRooftopFarming: "Фермы на крыше",
+                navContact: "Контакты",
+                navSmartHubsMobile: "Смарт-Хабы",
+                navBioTechMobile: "Био-Тех Решения",
+                navRooftopFarmingMobile: "Фермы на крыше",
+                navContactMobile: "Контакты",
                 heroTitle: "Будущее зовет",
                 heroSubtitle: "Перепрофилирование инфраструктуры Италии в сеть умных, устойчивых городских узлов.",
                 partnersTitle: "Наш Успех Основан на Разнообразном Опыте",
@@ -445,11 +526,16 @@
                 greenSolutionsTitle: "Предложение 2: Био-Технологические Решения для Воздуха",
                 greenSolutionsSubtitle: "Мы предлагаем интегрировать проверенные зеленые технологии, такие как биофильтры на основе мха, в городскую мебель и рекламные стенды для активной борьбы с загрязнением воздуха и городской жарой.",
                 greenSolutionsText: "Эта технология предлагает мощное, основанное на природе решение для борьбы с последствиями глобального потепления в городах, решая такие важные проблемы, как загрязнение воздуха и чрезмерная жара. Интегрируя живой мох с умными технологиями, эта система обеспечивает ключевые преимущества для городской среды и ее жителей:",
-                 greenBenefits: [
-                    { title: "Чистый воздух и лучшее здоровье", text: "Она очищает воздух, удаляя до 82% вредной мелкой пыли, которая является основной причиной респираторных и сердечно-сосудистых заболеваний. Это напрямую создает более здоровую среду для граждан. В зависимости от конфигурации система может очищать воздух для 20 000 человек в час." },
-                    { title: "Естественное охлаждение", text: "Для борьбы с эффектом 'городского теплового острова' система естественным образом охлаждает окружающий воздух до 4°C за счет испарения, делая общественные места более комфортными." },
-                    { title: "Эффективные климатические действия", text: "Биофильтры активно борются с изменением климата. Одна установка может компенсировать до 355 кг эквивалента CO2 в год. Она также очень эффективна в фильтрации сажи (черного углерода), частицы, которая значительно мощнее CO2 в ускорении глобального потепления, что делает ее ценным инструментом для защиты городов, где традиционное озеленение невозможно." }
-                ],
+                greenBenefits: [{
+                    title: "Чистый воздух и лучшее здоровье",
+                    text: "Она очищает воздух, удаляя до 82% вредной мелкой пыли, которая является основной причиной респираторных и сердечно-сосудистых заболеваний. Это напрямую создает более здоровую среду для граждан. В зависимости от конфигурации система может очищать воздух для 20 000 человек в час."
+                }, {
+                    title: "Естественное охлаждение",
+                    text: "Для борьбы с эффектом 'городского теплового острова' система естественным образом охлаждает окружающий воздух до 4°C за счет испарения, делая общественные места более комфортными."
+                }, {
+                    title: "Эффективные климатические действия",
+                    text: "Биофильтры активно борются с изменением климата. Одна установка может компенсировать до 355 кг эквивалента CO2 в год. Она также очень эффективна в фильтрации сажи (черного углерода), частицы, которая значительно мощнее CO2 в ускорении глобального потепления, что делает ее ценным инструментом для защиты городов, где традиционное озеленение невозможно."
+                }],
                 propositionsTitle: "Конфигурации для любых нужд",
                 propositionsSubtitle: "Умный городской узел — это не универсальное решение. Мы предлагаем несколько моделей, которые могут быть развернуты в зависимости от конкретных потребностей местоположения.",
                 standardFeaturesTitle: "Стандартные функции в каждом хабе",
@@ -462,18 +548,37 @@
                 contactButton: "Связаться с нами",
                 footerRights: "&copy; 2025 Elio Genesis Corporation. Все права защищены.",
                 footerSlogan: "Пионеры зеленых технологий для городской среды.",
-                transformationFeatures: [
-                    { title: "Общественная точка Wi-Fi", desc: "Бесплатный, высокоскоростной доступ в Интернет для всех." },
-                    { title: "Станция зарядки устройств", desc: "Порты USB-A и USB-C для зарядки личных устройств." },
-                    { title: "Дефибриллятор (АНД)", desc: "Доступный АНД для использования при сердечных приступах." },
-                    { title: "Аптечка первой помощи", desc: "Укомплектованная аптечка для оказания первой помощи." },
-                    { title: "Кнопка вызова такси", desc: "Мгновенный вызов такси одним нажатием." },
-                    { title: "Датчики среды IoT", desc: "Сбор данных в реальном времени о качестве воздуха, шуме и температуре." },
-                    { title: "Интерактивный городской киоск", desc: "Сенсорные экраны для карт, транспорта и местных событий." },
-                    { title: "Пункт экстренного вызова", desc: "Кнопка для связи со службами экстренной помощи." },
-                    { title: "Встроенная фильтрация воздуха", desc: "Встроенные фильтры активно очищают окружающий воздух, снижая уровень загрязнителей." },
-                    { title: "Витрина Микрозелени", desc: "Рекламный стенд, демонстрирующий простоту и преимущества городского фермерства для популяризации идеи." }
-                ],
+                transformationFeatures: [{
+                    title: "Общественная точка Wi-Fi",
+                    desc: "Бесплатный, высокоскоростной доступ в Интернет для всех."
+                }, {
+                    title: "Станция зарядки устройств",
+                    desc: "Порты USB-A и USB-C для зарядки личных устройств."
+                }, {
+                    title: "Дефибриллятор (АНД)",
+                    desc: "Доступный АНД для использования при сердечных приступах."
+                }, {
+                    title: "Аптечка первой помощи",
+                    desc: "Укомплектованная аптечка для оказания первой помощи."
+                }, {
+                    title: "Кнопка вызова такси",
+                    desc: "Мгновенный вызов такси одним нажатием."
+                }, {
+                    title: "Датчики среды IoT",
+                    desc: "Сбор данных в реальном времени о качестве воздуха, шуме и температуре."
+                }, {
+                    title: "Интерактивный городской киоск",
+                    desc: "Сенсорные экраны для карт, транспорта и местных событий."
+                }, {
+                    title: "Пункт экстренного вызова",
+                    desc: "Кнопка для связи со службами экстренной помощи."
+                }, {
+                    title: "Встроенная фильтрация воздуха",
+                    desc: "Встроенные фильтры активно очищают окружающий воздух, снижая уровень загрязнителей."
+                }, {
+                    title: "Витрина Микрозелени",
+                    desc: "Рекламный стенд, демонстрирующий простоту и преимущества городского фермерства для популяризации идеи."
+                }],
                 touristHubFeatures: ["Многоязычный информационный киоск", "Общественный Wi-Fi и зарядка устройств", "Продажа билетов на аттракционы/транспорт", "Безопасные ячейки"],
                 communityHubFeatures: ["Цифровая доска объявлений", "Датчики качества воздуха и шума", "Доступ к библиотеке обмена инструментами/книгами", "Пункт экстренного вызова", "Общедоступный дефибриллятор (АНД)", "Аптечка первой помощи"],
                 rooftopFarmingTitle: "Предложение 3: Фермерство на крыше",
@@ -509,7 +614,7 @@
         };
 
         const listCheckIcon = `<svg class="w-5 h-5 text-cyan-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
-        
+
         // --- LANGUAGE SWITCHING LOGIC ---
         function changeLanguage(lang) {
             localStorage.setItem('preferredLanguage', lang);
@@ -520,7 +625,11 @@
                 }
             });
             updateDynamicContent(lang);
-            const flags = { it: '🇮🇹', en: '🇬🇧', ru: '🇷🇺' };
+            const flags = {
+                it: '🇮🇹',
+                en: '🇬🇧',
+                ru: '🇷🇺'
+            };
             document.getElementById('current-lang-flag').textContent = flags[lang];
             document.getElementById('lang-dropdown').classList.add('hidden');
         }
@@ -531,32 +640,32 @@
             translations.en.transformationFeatures.forEach((feature, index) => {
                 const translatedFeature = translations[lang].transformationFeatures[index];
                 const card = `
-                    <div class="glass-card rounded-lg p-6 text-center">
-                        <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-slate-700/50 rounded-full">
-                           ${featureIcons[feature.title] || ''}
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">${translatedFeature.title}</h3>
-                        <p class="text-slate-400">${translatedFeature.desc}</p>
-                    </div>`;
+                        <div class="glass-card rounded-lg p-6 text-center">
+                            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-slate-700/50 rounded-full">
+                                ${featureIcons[feature.title] || ''}
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">${translatedFeature.title}</h3>
+                            <p class="text-slate-400">${translatedFeature.desc}</p>
+                        </div>`;
                 transformationGrid.innerHTML += card;
             });
-            
+
             const greenBenefitsList = document.getElementById('green-benefits-list');
             greenBenefitsList.innerHTML = '';
             translations.en.greenBenefits.forEach((benefit, index) => {
                 const translatedBenefit = translations[lang].greenBenefits[index];
                 const item = `
-                    <li class="flex">
-                        ${greenBenefitIcons[benefit.title] || ''}
-                        <div>
-                            <h4 class="font-bold text-lg text-white">${translatedBenefit.title}</h4>
-                            <p class="text-slate-400">${translatedBenefit.text}</p>
-                        </div>
-                    </li>`;
+                        <li class="flex">
+                            ${greenBenefitIcons[benefit.title] || ''}
+                            <div>
+                                <h4 class="font-bold text-lg text-white">${translatedBenefit.title}</h4>
+                                <p class="text-slate-400">${translatedBenefit.text}</p>
+                            </div>
+                        </li>`;
                 greenBenefitsList.innerHTML += item;
             });
 
-             const rooftopBenefitsList = document.getElementById('rooftop-benefits-list');
+            const rooftopBenefitsList = document.getElementById('rooftop-benefits-list');
             rooftopBenefitsList.innerHTML = '';
             translations[lang].rooftopBenefits.forEach(item => {
                 rooftopBenefitsList.innerHTML += `<li class="flex items-center">${listCheckIcon}${item}</li>`;
@@ -583,7 +692,11 @@
                     if (href && href.length > 1) {
                         e.preventDefault();
                         const targetElement = document.querySelector(href);
-                        if (targetElement) { targetElement.scrollIntoView({ behavior: 'smooth' }); }
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
                     }
                 });
             });
@@ -597,8 +710,15 @@
 
             const langSwitcherButton = document.getElementById('lang-switcher-button');
             const langDropdown = document.getElementById('lang-dropdown');
-            langSwitcherButton.addEventListener('click', (e) => { e.stopPropagation(); langDropdown.classList.toggle('hidden'); });
-            document.addEventListener('click', (e) => { if (!langSwitcherButton.contains(e.target)) { langDropdown.classList.add('hidden'); }});
+            langSwitcherButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langDropdown.classList.toggle('hidden');
+            });
+            document.addEventListener('click', (e) => {
+                if (!langSwitcherButton.contains(e.target)) {
+                    langDropdown.classList.add('hidden');
+                }
+            });
 
             const preferredLanguage = localStorage.getItem('preferredLanguage') || 'it';
             changeLanguage(preferredLanguage);
@@ -611,7 +731,9 @@
                         entry.target.classList.add('is-visible');
                     }
                 });
-            }, { threshold: 0.1 });
+            }, {
+                threshold: 0.1
+            });
             sections.forEach(section => observer.observe(section));
         });
     </script>
