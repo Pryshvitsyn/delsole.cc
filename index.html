@@ -169,11 +169,19 @@
             <div class="container mx-auto px-6">
                 <h3 data-key="partnersTitle" class="text-center text-slate-400 font-bold tracking-wider mb-8">Our Success is Built on a Foundation of Diverse Expertise</h3>
                 <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-8">
-                    <img src="EMI.jpg" alt="EMI Logo" class="h-12 logo-grayscale">
-                    <img src="green_chief.jpg" alt="Green Chief Logo" class="h-12 logo-grayscale">
+                    <a href="https://www.edilemi.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="EMI.jpg" alt="EMI Logo" class="h-12 logo-grayscale">
+                    </a>
+                    <a href="https://green-chief.eu/" target="_blank" rel="noopener noreferrer">
+                        <img src="green_chief.jpg" alt="Green Chief Logo" class="h-12 logo-grayscale">
+                    </a>
                     <img src="greencity.jpg" alt="Greencity Solutions Logo" class="h-10 logo-grayscale">
-                    <img src="sos_soluzione.jpg" alt="SOS Soluzione Logo" class="h-12 logo-grayscale">
-                    <img src="TGSimon.jpg" alt="TG Simon Logo" class="h-8 logo-grayscale">
+                    <a href="https://www.edilemi.com/interventi-servizi-roma-edilizia" target="_blank" rel="noopener noreferrer">
+                        <img src="sos_soluzione.jpg" alt="SOS Soluzione Logo" class="h-12 logo-grayscale">
+                    </a>
+                    <a href="https://www.tgsimon.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="TGSimon.jpg" alt="TG Simon Logo" class="h-8 logo-grayscale">
+                    </a>
                 </div>
             </div>
         </section>
@@ -640,13 +648,13 @@
             translations.en.transformationFeatures.forEach((feature, index) => {
                 const translatedFeature = translations[lang].transformationFeatures[index];
                 const card = `
-                        <div class="glass-card rounded-lg p-6 text-center">
-                            <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-slate-700/50 rounded-full">
-                                ${featureIcons[feature.title] || ''}
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-2">${translatedFeature.title}</h3>
-                            <p class="text-slate-400">${translatedFeature.desc}</p>
-                        </div>`;
+                                <div class="glass-card rounded-lg p-6 text-center">
+                                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-slate-700/50 rounded-full">
+                                        ${featureIcons[feature.title] || ''}
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-2">${translatedFeature.title}</h3>
+                                    <p class="text-slate-400">${translatedFeature.desc}</p>
+                                </div>`;
                 transformationGrid.innerHTML += card;
             });
 
@@ -655,13 +663,13 @@
             translations.en.greenBenefits.forEach((benefit, index) => {
                 const translatedBenefit = translations[lang].greenBenefits[index];
                 const item = `
-                        <li class="flex">
-                            ${greenBenefitIcons[benefit.title] || ''}
-                            <div>
-                                <h4 class="font-bold text-lg text-white">${translatedBenefit.title}</h4>
-                                <p class="text-slate-400">${translatedBenefit.text}</p>
-                            </div>
-                        </li>`;
+                                <li class="flex">
+                                    ${greenBenefitIcons[benefit.title] || ''}
+                                    <div>
+                                        <h4 class="font-bold text-lg text-white">${translatedBenefit.title}</h4>
+                                        <p class="text-slate-400">${translatedBenefit.text}</p>
+                                    </div>
+                                </li>`;
                 greenBenefitsList.innerHTML += item;
             });
 
